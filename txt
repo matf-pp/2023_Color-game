@@ -1,0 +1,9 @@
+Okej umorna sam malo sad 
+Dodat je neki basic homescreen sutra ga doradjujem ovo je samo da bismo svi imali skelet i 
+mogli brze da uradimo
+Kad se klikne na Play mode 1 treba da se pojavi Lukina varijanta, mode 2 je jevticeva varijanta
+Mozete biti proizvoljno kreativni sa dodavanjem stvarcica, ali neke standardne bi bile
+smanjivanje vremena koje korisnik ima da bi odgovorio na zadatak, menjanje boje pozadine 
+posle proizvoljnog broja tacnih odgovora, mozda neki count koliko tacnih, you win/you lost 
+prozorcici da iskoce u dual-player varijanti, tako neke stvari 
+ukoliko mi jos nesto padne na pamet javljam
