@@ -23,7 +23,7 @@ local _click = audio.loadStream("assets/sounds/click.wav")
 
 local function gotoGame1()
    -- utilities:playSound(_click) -- ovo nece da radi jer nece da ucita GGData u utilities.lua
-    omposer.gotoScene("scenes.game1")  --scenes.game1 je ono sto treba da se uradi
+    --composer.gotoScene("scenes.game1")  --scenes.game1 je ono sto treba da se uradi
     _grpMain = display.newGroup()
 
     local lblTitle = display.newText("ColorUp", _CX, 100, "ColorUpAssets/assets/fonts/Galada.ttf",76)
@@ -33,7 +33,7 @@ end
 
 local function gotoGame2()
     -- utilities:playSound(_click) -- ovo nece da radi jer nece da ucita GGData u utilities.lua
-     composer.gotoScene("scenes.game2")  --scenes.game2 je ono sto treba da se uradi
+     --composer.gotoScene("scenes.game2")  --scenes.game2 je ono sto treba da se uradi
      _grpMain = display.newGroup()
  
      local lblTitle = display.newText("ColorUp", _CX, 100, "ColorUpAssets/assets/fonts/Galada.ttf",76)
