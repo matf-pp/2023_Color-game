@@ -16,27 +16,31 @@ local scene = composer.newScene()
 local _grpMain
 
 --Sounds
-local _click = audio.loadStream("assets/sounds/click.wav")
+local _click = audio.loadStream("ColorUpAssets/assets/sounds/click.wav")
 
 
 -- Local functions
 
 local function gotoGame1()
-   -- utilities:playSound(_click) -- ovo nece da radi jer nece da ucita GGData u utilities.lua
-    --composer.gotoScene("scenes.game1")  --scenes.game1 je ono sto treba da se uradi
+    --ova dugmad jos uvek nisu funkcionalna da mi prebaci u klase,
+    -- kad budete radili mozete u ovim funkcijama,
+    --pa cemo lako kasnije prebaciti u klase
+    utilities:playSound(_click) -- nije radilo zbog slovne greske 
+    composer.gotoScene("scenes.game1")  --scenes.game1 je ono sto treba da se uradi
+    print("scene:create -")
     _grpMain = display.newGroup()
 
-    local lblTitle = display.newText("ColorUp", _CX, 100, "ColorUpAssets/assets/fonts/Galada.ttf",76)
+    local lblTitle = display.newText("Luka", _CX, 100, "ColorUpAssets/assets/fonts/Galada.ttf",76)
     lblTitle.fill = {1,1,1}
     _grpMain:insert(lblTitle)
 end
 
 local function gotoGame2()
-    -- utilities:playSound(_click) -- ovo nece da radi jer nece da ucita GGData u utilities.lua
-     --composer.gotoScene("scenes.game2")  --scenes.game2 je ono sto treba da se uradi
+     utilities:playSound(_click) 
+     composer.gotoScene("scenes.game2")  --scenes.game2 je ono sto treba da se uradi
      _grpMain = display.newGroup()
  
-     local lblTitle = display.newText("ColorUp", _CX, 100, "ColorUpAssets/assets/fonts/Galada.ttf",76)
+     local lblTitle = display.newText("Jevtic", _CX, 100, "ColorUpAssets/assets/fonts/Galada.ttf",76)
      lblTitle.fill = {1,1,1}
      _grpMain:insert(lblTitle)
  end

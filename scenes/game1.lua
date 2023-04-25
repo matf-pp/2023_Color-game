@@ -1,10 +1,8 @@
---drugari ovo je skelet za vas deo
-
 -- Import
 
 local composer = require("composer")
 local relayout = require("libs.relayout")
---local utilities = require("classes.utilities") --jer utilities ne rade ne kontam zasto
+local utilities = require("classes.utilities")
 
 -- Set variables
 
@@ -28,16 +26,8 @@ local _click = audio.loadStream("assets/sounds/click.wav")
 -- Scene events functions
 
 function scene:create(event)
-
-    print("scene:create - game")  -- ovo se ispisuje u konzoli
+    print("scene:create - menu")
     _grpMain = display.newGroup()
-
-    self.view:insert(_grpMain)
-
-    local background = display.newImageRect(_grpMain, "ColorUpAssets/assets/images/background.png", _W, _H)
-    background.x = _CX
-    background.y = _CY
-    background.alpha = 0.8
 
     self.view:insert(_grpMain)
 end

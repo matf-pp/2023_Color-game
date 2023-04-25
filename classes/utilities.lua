@@ -2,12 +2,12 @@
 
 -- iz nekog razloga nece da ucita GGData, ali hoce relayout na isti nacin u menu.lua
 
---[[local GGData = require("ColorUpAssets.libs.GGData")
+local GGData = require("ColorUpAssets.libs.GGData")
 
 -- Create class, set variables
 
 local utilities = {}
-local db = GGdata:new("db")
+local db = GGData:new("db")
 
 -- Init db
 
@@ -29,4 +29,3 @@ end
 -- Return
 
 return utilities
-]]
