@@ -18,6 +18,9 @@ local _grpMain
 --Sounds
 local _click = audio.loadStream("assets/sounds/click.wav")
 
+--Boje
+local colors = {"crvena","zelena", "plava","zuta", "ljubicasta", "braon", "narandzasta", "bela", "crna"}
+
 
 -- Local functions
 

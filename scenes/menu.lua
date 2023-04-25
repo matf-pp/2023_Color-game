@@ -16,12 +16,8 @@ local scene = composer.newScene()
 local _grpMain
 
 --Sounds
-local _click = audio.loadStream("/home/user/Desktop/2023_Color-game/ColorUpAssets/assets/sounds/click.wav")
+local _click = audio.loadStream("ColorUpAssets/assets/sounds/click.wav")
 
-local filename = "/home/user/Desktop/2023_Color-game/ColorUpAssets/assets/sounds/click.wav"
-if system.pathForFile( filename , system.ResourceDirectory ) == nil then
-    print("AAAAAA "..filename )
-end
 
 
 -- Local functions
