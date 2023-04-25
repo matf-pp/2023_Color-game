@@ -37,7 +37,7 @@ function scene:create(event)
     print("scene:create - menu")
     _grpMain = display.newGroup()
 
-    local background = display.newImageRect(_grpMain, "ColorUpAssets/assets/images/jeb.jpg", _W, _H)
+    local background = display.newImageRect(_grpMain, "ColorUpAssets/assets/images/white-crumpled-paper-texture-background_64749-1843.png", _W, _H)
     background.x = _CX
     background.y = _CY
     background.alpha = 0.9
