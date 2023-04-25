@@ -4,7 +4,7 @@
 
 local composer = require("composer")
 local relayout = require("libs.relayout")
---local utilities = require("classes.utilities") --jer utilities ne rade
+--local utilities = require("classes.utilities") --jer utilities ne rade ne kontam zasto
 
 -- Set variables
 
@@ -32,9 +32,12 @@ function scene:create(event)
     print("scene:create - game")  -- ovo se ispisuje u konzoli
     _grpMain = display.newGroup()
 
-    local lblSettings = display.newText("izvolte luka", _CX, _H - 40, "ColorUpAssets/assets/fonts/Galada.ttf", 26)
-    lblSettings.fill = {1,1,1}
-    _grpMain:insert(lblSettings)
+    self.view:insert(_grpMain)
+
+    local background = display.newImageRect(_grpMain, "ColorUpAssets/assets/images/background.png", _W, _H)
+    background.x = _CX
+    background.y = _CY
+    background.alpha = 0.8
 
     self.view:insert(_grpMain)
 end

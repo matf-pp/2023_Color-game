@@ -7,3 +7,7 @@ smanjivanje vremena koje korisnik ima da bi odgovorio na zadatak, menjanje boje 
 posle proizvoljnog broja tacnih odgovora, mozda neki count koliko tacnih, you win/you lost 
 prozorcici da iskoce u dual-player varijanti, tako neke stvari 
 ukoliko mi jos nesto padne na pamet javljam
+
+game1.lua se poziva u menu.lua:24 linija
+game2.lua se poziva u menu.lua:34 linija
+

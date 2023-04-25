@@ -4,8 +4,8 @@
 --
 
 local aspectRatio = display.pixelHeight / display.pixelWidth
-local width = 360
-local height = width * aspectRatio
+local width = display.pixelWidth
+local height = display.pixelHeight
 
 application =
 {

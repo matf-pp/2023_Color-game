@@ -23,13 +23,24 @@ local _click = audio.loadStream("assets/sounds/click.wav")
 
 local function gotoGame1()
    -- utilities:playSound(_click) -- ovo nece da radi jer nece da ucita GGData u utilities.lua
-    --composer.gotoScene("scenes.game")
+    omposer.gotoScene("scenes.game1")  --scenes.game1 je ono sto treba da se uradi
     _grpMain = display.newGroup()
 
     local lblTitle = display.newText("ColorUp", _CX, 100, "ColorUpAssets/assets/fonts/Galada.ttf",76)
     lblTitle.fill = {1,1,1}
     _grpMain:insert(lblTitle)
 end
+
+local function gotoGame2()
+    -- utilities:playSound(_click) -- ovo nece da radi jer nece da ucita GGData u utilities.lua
+     composer.gotoScene("scenes.game2")  --scenes.game2 je ono sto treba da se uradi
+     _grpMain = display.newGroup()
+ 
+     local lblTitle = display.newText("ColorUp", _CX, 100, "ColorUpAssets/assets/fonts/Galada.ttf",76)
+     lblTitle.fill = {1,1,1}
+     _grpMain:insert(lblTitle)
+ end
+ 
 
 
 
@@ -41,43 +52,40 @@ function scene:create(event)
 
     self.view:insert(_grpMain)
 
-    local background = display.newImageRect(_grpMain, "ColorUpAssets/assets/images/background.png", _W, _H)
+    local background = display.newImageRect(_grpMain, "ColorUpAssets/assets/images/pozadina.jpg", _W, _H)
     background.x = _CX
     background.y = _CY
+    background.alpha = 0.8
 
-    local lblTitle = display.newText("ColorUp", _CX, 100, "ColorUpAssets/assets/fonts/Galada.ttf",76)
+    local lblTitle = display.newText("Color Game", _CX, 50, "ColorUpAssets/assets/fonts/Galada.ttf",76)
     lblTitle.fill = {1,1,1}
     _grpMain:insert(lblTitle)
 
-    local btnPlay1 = display.newRoundedRect(_grpMain, _CX, _CY, 220, 80,20)
+    local btnPlay1 = display.newRoundedRect(_grpMain, _CX, _CY-100, 280, 80,20)
     btnPlay1.fill = {1,1,1}
     btnPlay1.alpha = 0.4;
 
-    local lblPlay1 = display.newText("Play - mode 1", _CX, _CY + 4, "ColorUpAssets/assets/fonts/Galada.ttf", 50)
+    local lblPlay1 = display.newText("Play - mode 1", _CX, _CY-97, "ColorUpAssets/assets/fonts/Galada.ttf", 50)
     lblPlay1.fill = {0,0,0}
     _grpMain:insert(lblPlay1)
 
-    btnPlay1:addEventListener("tap", gotoGame1)
+    btnPlay1:addEventListener("tap", gotoGame1)  --gotoGame1 nije spremljeno jos
 
-    local btnPlay2 = display.newRoundedRect(_grpMain, _CX, _CY, 220, 80,20)
+    local btnPlay2 = display.newRoundedRect(_grpMain, _CX, _CY, 280, 80,20)
     btnPlay2.fill = {1,1,1}
     btnPlay2.alpha = 0.4;
 
-    local lblPlay2 = display.newText("Play - mode 2", _CX, _H - 80, "ColorUpAssets/assets/fonts/Galada.ttf", 50)
+    local lblPlay2 = display.newText("Play - mode 2", _CX, _CY+3, "ColorUpAssets/assets/fonts/Galada.ttf", 50)
     lblPlay2.fill = {0,0,0}
     _grpMain:insert(lblPlay2)
 
-    btnPlay2:addEventListener("tap", gotoGame2)
+    btnPlay2:addEventListener("tap", gotoGame2)  --gotoGame2 nije spremljeno jos
     
     local lblSettings = display.newText("Settings", _CX, _H - 40, "ColorUpAssets/assets/fonts/Galada.ttf", 26)
     lblSettings.fill = {1,1,1}
     _grpMain:insert(lblSettings)
 
-    --lblSettings:addEventListener("tap", gotoSettings)
-
-    local lblLeaderBoards = display.newText("Leaderboards", _CX, _H - 100, "ColorUpAssets/assets/fonts/Galada.ttf",26)
-    lblLeaderBoards.fill = {1,1,1}
-    _grpMain:insert(lblLeaderBoards)
+    --lblSettings:addEventListener("tap", gotoSettings)  --ovo je moj deo
 
 end
 
