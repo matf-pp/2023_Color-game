@@ -11,3 +11,4 @@ ukoliko mi jos nesto padne na pamet javljam
 game1.lua se poziva u menu.lua:24 linija
 game2.lua se poziva u menu.lua:34 linija
 
+ps znam da je font ocajan promenicu 

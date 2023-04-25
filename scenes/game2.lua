@@ -31,6 +31,26 @@ function scene:create(event)
     _grpMain = display.newGroup()
 
     self.view:insert(_grpMain)
+
+    local btnPlay1 = display.newRoundedRect(_grpMain, _CX, _CY-100, 280, 80,20)
+    btnPlay1.fill = {1,1,1}
+    btnPlay1.alpha = 0.4;
+
+    local lblPlay1 = display.newText("Single player", _CX, _CY-97, "ColorUpAssets/assets/fonts/Galada.ttf", 50)
+    lblPlay1.fill = {0,0,0}
+    _grpMain:insert(lblPlay1)
+
+  --  btnPlay1:addEventListener("tap", gotoSP2)  --gotoSP2 nije spremljeno jos
+
+    local btnPlay2 = display.newRoundedRect(_grpMain, _CX, _CY, 280, 80,20)
+    btnPlay2.fill = {1,1,1}
+    btnPlay2.alpha = 0.4;
+
+    local lblPlay2 = display.newText("Dual player", _CX, _CY+3, "ColorUpAssets/assets/fonts/Galada.ttf", 50)
+    lblPlay2.fill = {0,0,0}
+    _grpMain:insert(lblPlay2)
+
+  --  btnPlay2:addEventListener("tap", gotoDP2)  --gotoDP2 nije spremljeno jos
 end
 
 function scene:show(event)

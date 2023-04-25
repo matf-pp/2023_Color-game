@@ -16,16 +16,18 @@ local scene = composer.newScene()
 local _grpMain
 
 --Sounds
-local _click = audio.loadStream("ColorUpAssets/assets/sounds/click.wav")
+local _click = audio.loadStream("/home/user/Desktop/2023_Color-game/ColorUpAssets/assets/sounds/click.wav")
+
+local filename = "/home/user/Desktop/2023_Color-game/ColorUpAssets/assets/sounds/click.wav"
+if system.pathForFile( filename , system.ResourceDirectory ) == nil then
+    print("AAAAAA "..filename )
+end
 
 
 -- Local functions
 
 local function gotoGame1()
-    --ova dugmad jos uvek nisu funkcionalna da mi prebaci u klase,
-    -- kad budete radili mozete u ovim funkcijama,
-    --pa cemo lako kasnije prebaciti u klase
-    utilities:playSound(_click) -- nije radilo zbog slovne greske 
+    utilities:playSound(_click)  
     composer.gotoScene("scenes.game1")  --scenes.game1 je ono sto treba da se uradi
     print("scene:create -")
     _grpMain = display.newGroup()
@@ -37,7 +39,7 @@ end
 
 local function gotoGame2()
      utilities:playSound(_click) 
-     composer.gotoScene("scenes.game2")  --scenes.game2 je ono sto treba da se uradi
+     composer.gotoScene("scenes.game2") --scenes.game2 je ono sto treba da se uradi
      _grpMain = display.newGroup()
  
      local lblTitle = display.newText("Jevtic", _CX, 100, "ColorUpAssets/assets/fonts/Galada.ttf",76)
