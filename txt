@@ -1,0 +1,47 @@
+
+Kad se klikne na Play mode 1 treba da se pojavi Lukina varijanta, mode 2 je jevticeva varijanta
+Mozete biti proizvoljno kreativni sa dodavanjem stvarcica, ali neke standardne bi bile
+smanjivanje vremena koje korisnik ima da bi odgovorio na zadatak, menjanje boje pozadine 
+posle proizvoljnog broja tacnih odgovora, mozda neki count koliko tacnih, you win/you lost 
+prozorcici da iskoce u dual-player varijanti, tako neke stvari 
+ukoliko mi jos nesto padne na pamet javljam
+
+game1.lua se poziva u menu.lua:43 linija
+game2.lua se poziva u menu.lua:54 linija
+
+ps znam da je font ocajan promenicu 
+
+-------------------------------------------------------------------
+
+ideja za implementaciju 
+
+local function SP1()
+
+    local string boja = random boja iz niza boje
+    local string fill = random boja
+    local lblTitle = display.newText(boja, _CX, 50, "ColorUpAssets/assets/fonts/Galada.ttf",76)
+    lblTitle.fill = fill
+    _grpMain:insert(lblTitle)
+
+    btnPlay1:addEventListener("tap", gotoKliknuto)
+
+    --za tajmer
+    local startTime = os.time()
+    local endTime = startTime+7
+
+    if os.time() >= endTime then
+    -- exit game
+    -- return to high score screen
+    end
+
+    if skor > 6 
+        dodati pozadinu fill-1 (da bi se osiguralo da nikad nije ista boja teksta i boja pozadine)
+
+gotoKliknuto:
+    ako se boje mecuju vrati se na funkciju SP1 i uvecaj skor
+    ako se ne mecuju izbaci box na kom pise koji je skor
+
+
+---------------------------------------------------------------
+
+
