@@ -1,4 +1,3 @@
-
 -- Import
 
 local composer = require("composer")
@@ -19,9 +18,46 @@ local _grpMain
 --Sounds
 local _click = audio.loadStream("assets/sounds/click.wav")
 
+--Boje
+local colors = {"crvena","zelena", "plava","zuta", "ljubicasta", "braon", "narandzasta", "bela", "crna"}
+
 
 -- Local functions
+local function SP2()
+    local tablesGroup = display.newGroup()
 
+    let randomColor = colors[math.random(1,table.getn(colors)-1)]
+
+    local tableRect = display.newRect(tablesGroup, 0, i*100, 200, 80)
+    tableRect:setFillColor(0.5, 0.5, 0.5)
+    local tableText = display.newText(tablesGroup, randomColor, 0, i*100, native.systemFont, 36)
+    tableText:setFillColor(1, 1, 1)
+
+    tablesGroup.x = _CX - tablesGroup.width/2
+    _grpMain:insert(tablesGroup)
+end
+
+local function DP2()
+  local tablesGroup = display.newGroup()
+
+  for i=1,#colors do
+      local tableRect = display.newRect(tablesGroup, 0, i*100, 200, 80)
+      tableRect:setFillColor(0.5, 0.5, 0.5)
+      local tableText = display.newText(tablesGroup, colors[i], 0, i*100, native.systemFont, 36)
+      tableText:setFillColor(1, 1, 1)
+  end
+
+  tablesGroup.x = _CX - tablesGroup.width/2
+  _grpMain:insert(tablesGroup)
+end
+
+local function gotoSP2()
+  SP2()
+end
+
+local function gotoDP2()
+  DP2()
+end
 
 
 -- Scene events functions
