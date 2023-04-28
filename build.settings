@@ -18,10 +18,18 @@ settings =
 	--
 	android =
 	{
+		googlePlayGamesAppId = "874231189156",
 		usesPermissions =
 		{
 			"android.permission.INTERNET",
+			"com.android.vending.CHECK_LICENSE"
 		},
+		applicationChildElements =
+		{
+			[[
+				<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-7458926770415601~7831222224"/>
+			]],
+		}
 	},
 
 	--
@@ -42,7 +50,15 @@ settings =
 	--
 	plugins =
 	{
-
+		-- Play services
+		["plugin.gpgs.v2"] = {
+			publisherId = "com.coronalabs",
+			supportedPlatforms = {["android"] = true, ["android-kindle"] = true}
+		},
+		-- Admob
+		["plugin.admob"] = {
+			publisherId = "com.coronalabs"
+		}
 	},
 
 	--
