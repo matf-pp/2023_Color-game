@@ -21,7 +21,7 @@ if not db.music then
 end
 
 if not db.background then
-    db:set("background","white")
+    db:set("background","black")
     db:save()
 end
 
