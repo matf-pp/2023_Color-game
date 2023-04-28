@@ -144,8 +144,6 @@ function scene:create(event)
         background = display.newImageRect(_grpMain, "ColorUpAssets/assets/images/white.png", _W, _H)
     end
 
-    --kad je pozadina crna, tema je bela, logicno
-
     background.x = _CX
     background.y = _CY
     background.alpha = 0.9

@@ -9,6 +9,7 @@ local utilities = require("classes.utilities")
 --Layout
 local _W, _H, _CX, _CY = relayout._W, relayout._H, relayout._CX, relayout._CY
 local background
+local duration = 5
 
 local theme = utilities:checkBackground()
 if utilities:checkBackground() == "white" then
@@ -44,12 +45,23 @@ local colorsArray = {clrRed, clrGreen, clrBlue, clrYellow, clrPurple, clrBrown, 
 
 
 local _lblTapToStart = ""
+local start_time = system.getTimer()
+local progress_bar
 
 -- Local functions
 
 local SP1 = {}
 local gotoSP1 = {}
 
+local function calculate_progress()   -- as a percentage
+  return (system.getTimer() - start_time) / duration
+end
+
+local function update_progress_bar(time_passed, total_time)
+  local progress = time_passed / total_time
+  progress_bar.width = progress * 2*display.contentWidth
+  progress_bar.x = _CX
+end
 
 function SP1()
 
@@ -57,22 +69,54 @@ function SP1()
 
   local tablesGroup = display.newGroup()
 
+  local start_time = os.time() -- record the start time
+  local total_time = 5 -- set the total time for the timer in seconds
+  local elapsed_time = 0 -- initialize the elapsed time to zero
+
+  local function on_enter_frame()
+    local elapsed_time = os.time() - start_time -- calculate the elapsed time
+    if elapsed_time >= total_time then
+        -- the timer is finished
+        print("Timer complete!")
+        progress_bar.width = 0 -- set the progress bar width to 0
+        Runtime:removeEventListener("enterFrame", on_enter_frame)
+    else
+        local progress = elapsed_time / total_time -- calculate progress as a fraction between 0 and 1
+        local max_width = display.contentWidth - 40 -- set the maximum width of the progress bar
+        local min_width = 20 -- set the minimum width of the progress bar
+
+        -- calculate the current width of the progress bar as a function of the progress
+        local current_width = max_width - (max_width - min_width) * progress
+
+        -- update the width of the progress bar
+        progress_bar.width = current_width
+    end
+end
+
+
+
+  Runtime:addEventListener("enterFrame", on_enter_frame)
+
   local randomNumber1 = math.random(1,table.getn(colors)-1)
   local randomColor = colors[randomNumber1]
   local randomNumber2 = math.random(1,table.getn(colorsArray)-1)
 
   local tableRect = display.newRect(tablesGroup, 0, 100, 250, 80)
-  tableRect:setFillColor(0,0,0)
+  tableRect.fill = theme
   local tableText = display.newText(tablesGroup, randomColor, 0, 100, native.systemFont, 36)
   local fillStr = colorsArray[randomNumber2]
   tableText:setFillColor(fillStr[1], fillStr[2], fillStr[3])
 
   tableRect:addEventListener("tap", SP1)
 
+  progress_bar.x = _CX   --ovo je da bi sredina timer-bara bila na levoj ivici
+  progress_bar.y = _CY + _CY/2
+
   tablesGroup.x = _CX
-  tablesGroup.y = _CY - _CY/2;
+  tablesGroup.y = _CY - _CY/2
   _grpMain:insert(tablesGroup)
 end
+
 
 local function gotoSP1()
   SP1()
@@ -102,8 +146,15 @@ function scene:create(event)
     _lblTapToStart.x = _CX
     _lblTapToStart.y = _CY
 
+    progress_bar = display.newRect(display.contentCenterX, display.contentCenterY, 2*display.contentWidth, 20)
+    progress_bar:setFillColor(0.2, 0.3, 0.5) -- set the color of the progress bar
+    progress_bar.x = _CX
+    progress_bar.y = _CY + _CY/2
 
-    _lblTapToStart:addEventListener("tap", gotoSP1)  --gotoSP1 nije spremljeno jos
+
+
+
+    _lblTapToStart:addEventListener("tap", gotoSP1)  
 
 end
 
