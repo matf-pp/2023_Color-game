@@ -60,7 +60,7 @@ end
 local function update_progress_bar(time_passed, total_time)
   local progress = time_passed / total_time
   progress_bar.width = progress * 2*display.contentWidth
-  progress_bar.x = _CX
+  progress_bar.x = 0
 end
 
 function SP1()
@@ -82,8 +82,8 @@ function SP1()
         Runtime:removeEventListener("enterFrame", on_enter_frame)
     else
         local progress = elapsed_time / total_time -- calculate progress as a fraction between 0 and 1
-        local max_width = display.contentWidth - 40 -- set the maximum width of the progress bar
-        local min_width = 20 -- set the minimum width of the progress bar
+        local max_width = 2*display.contentWidth -- set the maximum width of the progress bar
+        local min_width = 0 -- set the minimum width of the progress bar
 
         -- calculate the current width of the progress bar as a function of the progress
         local current_width = max_width - (max_width - min_width) * progress
@@ -109,7 +109,7 @@ end
 
   tableRect:addEventListener("tap", SP1)
 
-  progress_bar.x = _CX   --ovo je da bi sredina timer-bara bila na levoj ivici
+  progress_bar.x = 0
   progress_bar.y = _CY + _CY/2
 
   tablesGroup.x = _CX
