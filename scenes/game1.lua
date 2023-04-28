@@ -130,4 +130,3 @@ scene:addEventListener("hide",scene)
 scene:addEventListener("destroy",scene)
     
 return scene
-

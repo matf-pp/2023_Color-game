@@ -6,8 +6,21 @@ local utilities = require("classes.utilities")
 
 -- Set variables
 
+local background
+
 --Layout
 local _W, _H, _CX, _CY = relayout._W, relayout._H, relayout._CX, relayout._CY
+
+local theme = utilities:checkBackground()
+local slova = {0,0,0}
+if utilities:checkBackground() == "white" then
+    theme = {1,1,1}
+    slova = {0,0,0}
+else
+    theme = {0,0,0}
+    slova = {1,1,1}
+end
+
 
 --Scene
 local scene = composer.newScene()
@@ -37,16 +50,20 @@ function scene:create(event)
     print("scene:create - menu")
     _grpMain = display.newGroup()
 
-    local background = display.newImageRect(_grpMain, "ColorUpAssets/assets/images/white-crumpled-paper-texture-background_64749-1843.png", _W, _H)
+    if utilities:checkBackground() == "white" then
+        background = display.newImageRect(_grpMain, "ColorUpAssets/assets/images/black.png", _W, _H)
+    else
+        background = display.newImageRect(_grpMain, "ColorUpAssets/assets/images/white.png", _W, _H)
+    end
     background.x = _CX
     background.y = _CY
     background.alpha = 0.9
 
     local rect = display.newRoundedRect(_grpMain, _CX, _CY-30, 300, 400,20)
-    rect.fill = {1,1,1}
+    rect.fill = theme
     rect.alpha = 0.4;
     rect.strokeWidth = 4 
-    rect.stroke = {0, 0, 0}
+    rect.stroke = slova
 
     local lblPlay1 = display.newText("Kako igrati nasu igru? \n" ..
                                      "Mode 1: \n" ..
@@ -60,11 +77,11 @@ function scene:create(event)
                                      "imati vise ponudjenih \n"..
                                      "odgovora. Sto brze izaberite\n"..
                                      "onaj pravi.", _CX, _CY-30, "ColorUpAssets/assets/fonts/OpenDyslexic-Regular.otf", 18)
-    lblPlay1.fill = {0,0,0}
+    lblPlay1.fill = theme
     _grpMain:insert(lblPlay1)
 
-    local lblBack = display.newText("Back", _CX+100, _H-80, "ColorUpAssets/assets/fonts/OpenDyslexic-Regular.otf", 26)
-    lblBack.fill = {0,0,0}
+    local lblBack = display.newText("Nazad", _CX+100, _H-80, "ColorUpAssets/assets/fonts/OpenDyslexic-Regular.otf", 26)
+    lblBack.fill = theme
     _grpMain:insert(lblBack)
     lblBack:addEventListener("tap", gotoMenu)
 
