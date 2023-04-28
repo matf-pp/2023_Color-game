@@ -22,30 +22,65 @@ local _click = audio.loadStream("assets/sounds/click.wav")
 local colors = {"crvena","zelena", "plava","zuta", "ljubicasta", "braon", "narandzasta", "bela", "crna"}
 
 
+local clrRed =    {1, 51/255, 51/255}       
+local clrGreen =  {102/255, 204/255, 0}     
+local clrBlue =   {0, 102/255, 204/255}      
+local clrYellow = {1, 1, 51/255}
+local clrPurple = {153/255, 51/255, 204/255}
+local clrBrown =  {150/255, 75/255, 0}
+local clrOrange = {1, 153/255, 51/255}
+local clrWhite =  {1, 1, 1}
+local clrBlack =  {0, 0, 0}
+
+local colorsArray = {clrRed, clrGreen, clrBlue, clrYellow, clrPurple, clrBrown, clrOrange, clrWhite, clrBlack}
+
 -- Local functions
 local function SP2()
-    local tablesGroup = display.newGroup()
-
-    local randomColor = colors[math.random(1,table.getn(colors)-1)]
-
-    local tableRect = display.newRect(tablesGroup, 0, i*100, 200, 80)
-    tableRect:setFillColor(0.5, 0.5, 0.5)
-    local tableText = display.newText(tablesGroup, randomColor, 0, i*100, native.systemFont, 36)
-    tableText:setFillColor(1, 1, 1)
-
-    tablesGroup.x = _CX - tablesGroup.width/2
-    _grpMain:insert(tablesGroup)
-end
-
-local function DP2()
   local tablesGroup = display.newGroup()
 
-  for i=1,#colors do
-      local tableRect = display.newRect(tablesGroup, 0, i*100, 200, 80)
-      tableRect:setFillColor(0.5, 0.5, 0.5)
-      local tableText = display.newText(tablesGroup, colors[i], 0, i*100, native.systemFont, 36)
-      tableText:setFillColor(1, 1, 1)
-  end
+  --nasumicno izaberi boju
+  local randomNumber1 = math.random(1,table.getn(colors)-1)
+  local randomColor = colors[randomNumber1]
+  local randomNumber2 = math.random(1,table.getn(colorsArray)-1)
+
+  --promeni boju pozadine
+  -- local background = display.newImageRect(_grpMain, "ColorUpAssets/assets/images/Gray-background.jpeg", _W, _H)
+  -- background.x = _CX
+  -- background.y = _CY
+  -- background.alpha = 0.9
+
+  --prikazi boju koju korisnik treba izabrati medju ponudjenim
+  local tableRect = display.newRect(tablesGroup, 150, 40, 180, 80)
+  tableRect:setFillColor(0.5, 0.5, 0.5)
+  local tableText = display.newText(tablesGroup, colors[7], 150, 40, native.systemFont, 24)
+  local fillStr = colorsArray[randomNumber2]
+  tableText:setFillColor(fillStr[1], fillStr[2], fillStr[3])
+
+
+  --prikazi cetiri ponudjene boje od kojih je jedna tacna
+  --1
+  local tableRect = display.newRect(tablesGroup, 50, 300, 120, 80)
+  tableRect:setFillColor(0.5, 0.5, 0.5)
+  local tableText = display.newText(tablesGroup, colors[1], 50, 300, native.systemFont, 24)
+  tableText:setFillColor(1, 1, 1)
+
+  --2 fiksiramo pravu boju na drugo mesto, pri cemu postoji mogucnost da je neka od ostalih opcija pokupi
+  local tableRect = display.newRect(tablesGroup, 210, 300, 120, 80)
+  tableRect:setFillColor(0.5, 0.5, 0.5)
+  local tableText = display.newText(tablesGroup, randomColor, 210, 300, native.systemFont, 24)
+  tableText:setFillColor(1, 1, 1)
+
+  --3
+  local tableRect = display.newRect(tablesGroup, 50, 400, 120, 80)
+  tableRect:setFillColor(0.5, 0.5, 0.5)
+  local tableText = display.newText(tablesGroup, colors[3], 50, 400, native.systemFont, 24)
+  tableText:setFillColor(1, 1, 1)
+
+  --4
+  local tableRect = display.newRect(tablesGroup, 210, 400, 120, 80)
+  tableRect:setFillColor(0.5, 0.5, 0.5)
+  local tableText = display.newText(tablesGroup, colors[4], 210, 400, native.systemFont, 24)
+  tableText:setFillColor(1, 1, 1)
 
   tablesGroup.x = _CX - tablesGroup.width/2
   _grpMain:insert(tablesGroup)
@@ -53,10 +88,6 @@ end
 
 local function gotoSP2()
   SP2()
-end
-
-local function gotoDP2()
-  DP2()
 end
 
 
@@ -76,17 +107,7 @@ function scene:create(event)
     lblPlay1.fill = {0,0,0}
     _grpMain:insert(lblPlay1)
 
-  --  btnPlay1:addEventListener("tap", gotoSP2)  --gotoSP2 nije spremljeno jos
-
-    local btnPlay2 = display.newRoundedRect(_grpMain, _CX, _CY, 280, 80,20)
-    btnPlay2.fill = {1,1,1}
-    btnPlay2.alpha = 0.4;
-
-    local lblPlay2 = display.newText("Dual player", _CX, _CY+3, "ColorUpAssets/assets/fonts/Galada.ttf", 50)
-    lblPlay2.fill = {0,0,0}
-    _grpMain:insert(lblPlay2)
-
-  --  btnPlay2:addEventListener("tap", gotoDP2)  --gotoDP2 nije spremljeno jos
+    btnPlay1:addEventListener("tap", gotoSP2)
 end
 
 function scene:show(event)
