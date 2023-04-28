@@ -1,13 +1,12 @@
 -- Import
 
--- iz nekog razloga nece da ucita GGData, ali hoce relayout na isti nacin u menu.lua
-
 local GGData = require("ColorUpAssets.libs.GGData")
 
 -- Create class, set variables
 
 local utilities = {}
 local db = GGData:new("db")
+
 
 -- Init db
 
@@ -18,6 +17,11 @@ end
 
 if not db.music then
     db:set("music", "On")
+    db:save()
+end
+
+if not db.background then
+    db:set("background","black")
     db:save()
 end
 
@@ -70,6 +74,24 @@ function utilities:toggleMusic()
 
     db:save()
 end
+
+
+function utilities:checkBackground()
+
+    return db.background
+end
+
+function utilities:changeBackground()
+
+    if db.background == "white" then
+        db:set("background","black")
+    else
+        db:set("background","white")
+    end
+
+    db:save()
+end
+
 
 
 -- Return

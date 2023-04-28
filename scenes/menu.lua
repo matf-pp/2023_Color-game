@@ -9,6 +9,17 @@ local transition2 = require("ColorUpAssets.transition2")
 
 local lblTitle
 local Rect1
+local JEBEMTISVE
+local background
+
+local theme = utilities:checkBackground()
+if utilities:checkBackground() == "white" then
+    theme = {1,1,1}
+else
+    theme = {0,0,0}
+end
+
+
 
 --Layout
 local _W, _H, _CX, _CY = relayout._W, relayout._H, relayout._CX, relayout._CY
@@ -20,8 +31,8 @@ local scene = composer.newScene()
 local _grpMain
 local _grpConfetti
 
---Sounds
-local _click = audio.loadStream("ColorUpAssets/assets/sounds/click.wav")
+--Sounds --JEBEM TI ZVUK
+JEBEMTISVE = audio.loadSound("ColorUpAssets/assets/sounds/click.wav")
 
 --Colors
 local colors = {
@@ -39,14 +50,12 @@ local colors = {
 -- Local functions
 
 local function gotoGame1()
-    utilities:playSound(_click)  
+    utilities:playSound(JEBEMTISVE)  
     composer.gotoScene("scenes.game1")  --scenes.game1 je ono sto treba da se uradi
     print("scene:create -")
     _grpMain = display.newGroup()
 
-    local lblTitle = display.newText("Luka", _CX, 100, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf",76)
-    lblTitle.fill = {1,1,1}
-    _grpMain:insert(lblTitle)
+
 end
 
 local function gotoGame2()
@@ -63,6 +72,12 @@ local function gotoGame2()
 
     utilities:playSound(_click)
     composer.gotoScene( "scenes.settings" )
+
+    if utilities:checkBackground() == "white" then
+        composer.gotoScene( "scenes.settings2" )
+    else
+        composer.gotoScene( "scenes.settings" ) 
+    end
 end
 
  local function gotoEasterEgg()
@@ -73,7 +88,7 @@ end
     if Rect1.fill.r == lblTitle.fill.r and Rect1.fill.g == lblTitle.fill.g and Rect1.fill.b == lblTitle.fill.b then
         for i = 1, 200 do
             local leaf = display.newRoundedRect(_CX, _CY, 10, 10, 2)
-            leaf.alpha = 1
+            leaf.alpha = 0.3
             leaf.rotation = math.random(0, 360)
             _grpConfetti:insert(leaf)
         
@@ -122,34 +137,40 @@ function scene:create(event)
 
     self.view:insert(_grpMain)
 
-    _grpConfetti = display.newGroup()
-    _grpMain:insert(_grpConfetti)
 
-    local background = display.newImageRect(_grpMain, "ColorUpAssets/assets/images/white-crumpled-paper-texture-background_64749-1843.png", _W, _H)
+    if utilities:checkBackground() == "white" then
+        background = display.newImageRect(_grpMain, "ColorUpAssets/assets/images/black.png", _W, _H)
+    else
+        background = display.newImageRect(_grpMain, "ColorUpAssets/assets/images/white.png", _W, _H)
+    end
+
     background.x = _CX
     background.y = _CY
     background.alpha = 0.9
 
+    _grpConfetti = display.newGroup()
+    _grpMain:insert(_grpConfetti)
+
     lblTitle = display.newText("Color Game", _CX, 50, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf",70)
-    lblTitle.fill = {0,0,0}
+    lblTitle.fill = theme
     _grpMain:insert(lblTitle)
 
     local btnPlay1 = display.newRoundedRect(_grpMain, _CX, _CY-100, 240, 50,20)
-    btnPlay1.fill = {1,1,1}
+    btnPlay1.fill = theme
     btnPlay1.alpha = 0.4;
 
     local lblPlay1 = display.newText("Play - mode 1", _CX, _CY-100, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
-    lblPlay1.fill = {0,0,0}
+    lblPlay1.fill = theme
     _grpMain:insert(lblPlay1)
 
     btnPlay1:addEventListener("tap", gotoGame1)  --gotoGame1 nije spremljeno jos
 
     local btnPlay2 = display.newRoundedRect(_grpMain, _CX, _CY, 240, 50,20)
-    btnPlay2.fill = {1,1,1}
+    btnPlay2.fill = theme
     btnPlay2.alpha = 0.4;
 
     local lblPlay2 = display.newText("Play - mode 2", _CX, _CY+3, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
-    lblPlay2.fill = {0,0,0}
+    lblPlay2.fill = theme
     _grpMain:insert(lblPlay2)
 
     btnPlay2:addEventListener("tap", gotoGame2)  --gotoGame2 nije spremljeno jos
@@ -161,19 +182,19 @@ function scene:create(event)
     _grpMain:insert(Rect1)
 
     local lblIndex = display.newText("187/83/63", _CX, _CY+90, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
-    lblIndex.fill = {0,0,0}
+    lblIndex.fill = theme
     _grpMain:insert(lblIndex)
 
 
     Rect1:addEventListener("tap", gotoEasterEgg)
 
-    local lblInstructions = display.newText("How to play", _CX-70, _H-80, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 35)
-    lblInstructions.fill = {0,0,0}
+    local lblInstructions = display.newText("Kako?", _CX-70, _H-80, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 35)
+    lblInstructions.fill = theme
     _grpMain:insert(lblInstructions)
     lblInstructions:addEventListener("tap", gotoInstructions) 
     
-    local lblSettings = display.newText("Settings", _CX+100, _H-80, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 35)
-    lblSettings.fill = {0,0,0}
+    local lblSettings = display.newText("Podesavanja", _CX+100, _H-80, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 35)
+    lblSettings.fill = theme
     _grpMain:insert(lblSettings)
 
     lblSettings:addEventListener("tap", gotoSettings) 

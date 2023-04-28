@@ -8,6 +8,16 @@ local utilities = require("classes.utilities")
 
 --Layout
 local _W, _H, _CX, _CY = relayout._W, relayout._H, relayout._CX, relayout._CY
+local background
+local duration = 5
+
+local theme = utilities:checkBackground()
+if utilities:checkBackground() == "white" then
+    theme = {1,1,1}
+else
+    theme = {0,0,0}
+end
+
 
 --Scene
 local scene = composer.newScene()
@@ -34,44 +44,82 @@ local clrBlack =  {0, 0, 0}
 local colorsArray = {clrRed, clrGreen, clrBlue, clrYellow, clrPurple, clrBrown, clrOrange, clrWhite, clrBlack}
 
 
+local _lblTapToStart = ""
+local start_time = system.getTimer()
+local progress_bar
+
 -- Local functions
-local function SP1()
+
+local SP1 = {}
+local gotoSP1 = {}
+
+local function calculate_progress()   -- as a percentage
+  return (system.getTimer() - start_time) / duration
+end
+
+local function update_progress_bar(time_passed, total_time)
+  local progress = time_passed / total_time
+  progress_bar.width = progress * 2*display.contentWidth
+  progress_bar.x = 0
+end
+
+function SP1()
+
+  _lblTapToStart.alpha = 0
+
   local tablesGroup = display.newGroup()
+
+  local start_time = os.time() -- record the start time
+  local total_time = 5 -- set the total time for the timer in seconds
+  local elapsed_time = 0 -- initialize the elapsed time to zero
+
+  local function on_enter_frame()
+    local elapsed_time = os.time() - start_time -- calculate the elapsed time
+    if elapsed_time >= total_time then
+        -- the timer is finished
+        print("Timer complete!")
+        progress_bar.width = 0 -- set the progress bar width to 0
+        Runtime:removeEventListener("enterFrame", on_enter_frame)
+    else
+        local progress = elapsed_time / total_time -- calculate progress as a fraction between 0 and 1
+        local max_width = 2*display.contentWidth -- set the maximum width of the progress bar
+        local min_width = 0 -- set the minimum width of the progress bar
+
+        -- calculate the current width of the progress bar as a function of the progress
+        local current_width = max_width - (max_width - min_width) * progress
+
+        -- update the width of the progress bar
+        progress_bar.width = current_width
+    end
+end
+
+
+
+  Runtime:addEventListener("enterFrame", on_enter_frame)
 
   local randomNumber1 = math.random(1,table.getn(colors)-1)
   local randomColor = colors[randomNumber1]
   local randomNumber2 = math.random(1,table.getn(colorsArray)-1)
 
-  local tableRect = display.newRect(tablesGroup, 0, 100, 200, 80)
-  tableRect:setFillColor(0.5, 0.5, 0.5)
+  local tableRect = display.newRect(tablesGroup, 0, 100, 250, 80)
+  tableRect.fill = theme
   local tableText = display.newText(tablesGroup, randomColor, 0, 100, native.systemFont, 36)
   local fillStr = colorsArray[randomNumber2]
   tableText:setFillColor(fillStr[1], fillStr[2], fillStr[3])
 
-  tablesGroup.x = _CX - tablesGroup.width/2
+  tableRect:addEventListener("tap", SP1)
+
+  progress_bar.x = 0
+  progress_bar.y = _CY + _CY/2
+
+  tablesGroup.x = _CX
+  tablesGroup.y = _CY - _CY/2
   _grpMain:insert(tablesGroup)
 end
 
-local function DP1()
-  local tablesGroup = display.newGroup()
-
-  for i=1,#colors do
-      local tableRect = display.newRect(tablesGroup, 0, i*100, 200, 80)
-      tableRect:setFillColor(0.5, 0.5, 0.5)
-      local tableText = display.newText(tablesGroup, colors[i], 0, i*100, native.systemFont, 36)
-      tableText:setFillColor(1, 1, 1)
-  end
-
-  tablesGroup.x = _CX - tablesGroup.width/2
-  _grpMain:insert(tablesGroup)
-end
 
 local function gotoSP1()
   SP1()
-end
-
-local function gotoDP1()
-  DP1()
 end
 
 -- Scene events functions
@@ -82,25 +130,32 @@ function scene:create(event)
 
     self.view:insert(_grpMain)
 
-    local btnPlay1 = display.newRoundedRect(_grpMain, _CX, _CY-100, 280, 80,20)
-    btnPlay1.fill = {1,1,1}
-    btnPlay1.alpha = 0.4;
+    if utilities:checkBackground() == "white" then
+      background = display.newImageRect(_grpMain, "ColorUpAssets/assets/images/black.png", _W, _H)
+    else
+        background = display.newImageRect(_grpMain, "ColorUpAssets/assets/images/white.png", _W, _H)
+    end
 
-    local lblPlay1 = display.newText("Single player", _CX, _CY-97, "ColorUpAssets/assets/fonts/Galada.ttf", 50)
-    lblPlay1.fill = {0,0,0}
-    _grpMain:insert(lblPlay1)
+    background.x = _CX
+    background.y = _CY
 
-    btnPlay1:addEventListener("tap", gotoSP1)  --gotoSP1 nije spremljeno jos
 
-    local btnPlay2 = display.newRoundedRect(_grpMain, _CX, _CY, 280, 80,20)
-    btnPlay2.fill = {1,1,1}
-    btnPlay2.alpha = 0.4;
+    _lblTapToStart = display.newText("Tap to start", _CX, _CY, "assets/fonts/Galada.ttf", 46)
+    _lblTapToStart.fill = theme
+    _grpMain:insert(_lblTapToStart)
+    _lblTapToStart.x = _CX
+    _lblTapToStart.y = _CY
 
-    local lblPlay2 = display.newText("Dual player", _CX, _CY+3, "ColorUpAssets/assets/fonts/Galada.ttf", 50)
-    lblPlay2.fill = {0,0,0}
-    _grpMain:insert(lblPlay2)
+    progress_bar = display.newRect(display.contentCenterX, display.contentCenterY, 2*display.contentWidth, 20)
+    progress_bar:setFillColor(0.2, 0.3, 0.5) -- set the color of the progress bar
+    progress_bar.x = _CX
+    progress_bar.y = _CY + _CY/2
 
-  --  btnPlay2:addEventListener("tap", gotoDP1)  --gotoDP1 nije spremljeno jos
+
+
+
+    _lblTapToStart:addEventListener("tap", gotoSP1)  
+
 end
 
 function scene:show(event)
@@ -130,4 +185,3 @@ scene:addEventListener("hide",scene)
 scene:addEventListener("destroy",scene)
     
 return scene
-
