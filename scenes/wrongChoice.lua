@@ -9,6 +9,19 @@ local utilities = require("classes.utilities")
 --Layout
 local _W, _H, _CX, _CY = relayout._W, relayout._H, relayout._CX, relayout._CY
 
+local background
+
+
+local theme = utilities:checkBackground()
+if utilities:checkBackground() == "white" then
+    theme = {1,1,1}
+else
+    theme = {0,0,0}
+end
+
+
+
+
 --Scene
 local scene = composer.newScene()
 
@@ -24,14 +37,14 @@ local function gotoPlayAgain()
     utilities:playSound(_click) 
     composer.gotoScene("scenes.game2")
     print("scene:create -")
-    _grpMain = display.newGroup()
+   -- _grpMain = display.newGroup()
 end
 
 local function gotoMainMenu()
     utilities:playSound(_click) 
     composer.gotoScene("scenes.menu")
     print("scene:create -")
-    _grpMain = display.newGroup()
+   -- _grpMain = display.newGroup()
 end
 
 
@@ -53,7 +66,7 @@ function scene:create(event)
     background.y = _CY
 
     --Message
-    _lblMessage = display.newText("Wrong choice!", _CX, _CY, "assets/fonts/Galada.ttf", 46)
+    local _lblMessage = display.newText("Wrong choice!", _CX, _CY, "assets/fonts/Galada.ttf", 46)
     _lblMessage.fill = theme
     _grpMain:insert(_lblMessage)
     _lblMessage.x = _CX
@@ -63,6 +76,7 @@ function scene:create(event)
     local btnPlayAgain = display.newRoundedRect(_grpMain, _CX, _CY-100, 240, 50,20)
     btnPlayAgain.fill = theme
     btnPlayAgain.alpha = 0.4;
+    _grpMain:insert(btnPlayAgain)
 
     local lblPlayAgain = display.newText("Mode 1", _CX, _CY-100, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
     lblPlayAgain.fill = theme

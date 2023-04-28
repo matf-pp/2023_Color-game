@@ -5,3 +5,7 @@ native.setProperty("preferredScreenEdgesDeferringSystemGestures",true)
 local composer = require("composer")
 composer.recycleOnSceneChange = true
 composer.gotoScene("scenes.menu")
+
+--Play games
+local gamecenter = require("classes.helper_gamecenter")
+gamecenter:init()

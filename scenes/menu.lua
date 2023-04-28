@@ -9,7 +9,6 @@ local transition2 = require("ColorUpAssets.transition2")
 
 local lblTitle
 local Rect1
-local JEBEMTISVE
 local background
 
 local theme = utilities:checkBackground()
@@ -62,10 +61,6 @@ local function gotoGame2()
      utilities:playSound(_click) 
      composer.gotoScene("scenes.game2") --scenes.game2 je ono sto treba da se uradi
      _grpMain = display.newGroup()
- 
-     local lblTitle = display.newText("Jevtic", _CX, 100, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf",76)
-     lblTitle.fill = {1,1,1}
-     _grpMain:insert(lblTitle)
  end
 
  local function gotoSettings()
