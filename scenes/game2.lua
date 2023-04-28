@@ -149,18 +149,18 @@ local function SP2()
   local randomNumber2 = math.random(1,table.getn(colorsArray)-1)
 
   --podaci o pozicijama labela
-  X_main_color = 0
-  Y_main_color = 0
+  local X_main_color = 0
+  local Y_main_color = 0
 
-  X_option_1_3 = -80
-  X_option_2_4 = 80
-  Y_option_1_2 = 150
-  Y_option_3_4 = 250
+  local X_option_1_3 = -80
+  local X_option_2_4 = 80
+  local Y_option_1_2 = 150
+  local Y_option_3_4 = 250
 
-  color_width = 140
-  color_height = 60
+  local color_width = 140
+  local color_height = 60
 
-  cornerRadius = 5
+  local cornerRadius = 5
 
   --prikazi boju koju korisnik treba izabrati medju ponudjenim
   local rectMainColor = display.newRoundedRect(tablesGroup, X_main_color, Y_main_color, color_width, color_height, cornerRadius)

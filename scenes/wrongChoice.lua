@@ -19,9 +19,6 @@ else
     theme = {0,0,0}
 end
 
-
-
-
 --Scene
 local scene = composer.newScene()
 
@@ -66,19 +63,17 @@ function scene:create(event)
     background.y = _CY
 
     --Message
-    local _lblMessage = display.newText("Wrong choice!", _CX, _CY, "assets/fonts/Galada.ttf", 46)
+    local _lblMessage = display.newText("Wrong choice!", _CX, _CY - 100, "assets/fonts/Galada.ttf", 46)
     _lblMessage.fill = theme
     _grpMain:insert(_lblMessage)
-    _lblMessage.x = _CX
-    _lblMessage.y = _CY
 
     --Play again
-    local btnPlayAgain = display.newRoundedRect(_grpMain, _CX, _CY-100, 240, 50,20)
+    local btnPlayAgain = display.newRoundedRect(_grpMain, _CX - 80, _CY + 100, 140, 60,20)
     btnPlayAgain.fill = theme
     btnPlayAgain.alpha = 0.4;
     _grpMain:insert(btnPlayAgain)
 
-    local lblPlayAgain = display.newText("Mode 1", _CX, _CY-100, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
+    local lblPlayAgain = display.newText("Play again", _CX - 80, _CY + 100, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
     lblPlayAgain.fill = theme
     _grpMain:insert(lblPlayAgain)
 
@@ -86,17 +81,15 @@ function scene:create(event)
 
 
     --Main menu
-    local btnMainMenu = display.newRoundedRect(_grpMain, _CX, _CY, 240, 50,20)
+    local btnMainMenu = display.newRoundedRect(_grpMain, _CX + 80, _CY + 100, 140, 60,20)
     btnMainMenu.fill = theme
     btnMainMenu.alpha = 0.4;
 
-    local lblMainMenu = display.newText("Mode 2", _CX, _CY+3, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
+    local lblMainMenu = display.newText("Main menu", _CX + 80, _CY + 100, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
     lblMainMenu.fill = theme
     _grpMain:insert(lblMainMenu)
 
     btnMainMenu:addEventListener("tap", gotoMainMenu)
-
-
 end
 
 function scene:show(event)
