@@ -4,10 +4,6 @@ local composer = require("composer")
 local relayout = require("libs.relayout")
 local utilities = require("classes.utilities")
 
--- Set variables
-score = 0
-math.randomseed(133)
-
 --Layout
 local _W, _H, _CX, _CY = relayout._W, relayout._H, relayout._CX, relayout._CY
 local background
@@ -29,7 +25,7 @@ local _grpMain
 --Sounds
 local _click = audio.loadStream("assets/sounds/click.wav")
 
---Boje
+--Colors
 local colors = {"crvena", "zelena", "plava", "zuta", "ljubicasta", "braon", "narandzasta", "bela", "crna"}
 
 local clrRed =    {1, 51/255, 51/255}       
@@ -44,18 +40,22 @@ local clrBlack =  {0, 0, 0}
 
 local colorsArray = {clrRed, clrGreen, clrBlue, clrYellow, clrPurple, clrBrown, clrOrange, clrWhite, clrBlack}
 
+--Variables
 local _lblTapToStart = ""
 local start_time = system.getTimer()
+local elapsed_time = 0
+local total_time = 5  --in seconds
 local progress_bar
-
+local score = 0
+math.randomseed(133)
 
 -- Local functions
-local function gotoWrongChoice()
+local function gotoTimeIsUp()
   utilities:playSound(_click) 
-  composer.gotoScene("scenes.wrongChoice")
+  progress_bar.width = 0
+  composer.gotoScene("scenes.timeIsUp")
   _grpMain = display.newGroup()
 end
-
 
 local function getTrueColorName(color)
   local name
@@ -84,7 +84,7 @@ end
 
 local function getRandomColors(t)
   if ( type(t) ~= "table" ) then
-    print( "WARNING: getRandomColors function expects two tables" )
+    print( "WARNING: getRandomColors function expects a table" )
     return nil, nil, nil, nil
   end
 
@@ -107,39 +107,46 @@ local function calculate_progress()   -- as a percentage
   return (system.getTimer() - start_time) / duration
 end
 
-local function update_progress_bar(time_passed, total_time)
-  local progress = time_passed / total_time
-  progress_bar.width = progress * 2*display.contentWidth
-  progress_bar.x = 0
+local function update_progress_bar()
+  local progress = elapsed_time / total_time -- calculate progress as a fraction between 0 and 1
+  local max_width = 2*display.contentWidth + 200  -- set the maximum width of the progress bar
+  local min_width = 0 -- set the minimum width of the progress bar
+
+  -- calculate the current width of the progress bar as a function of the progress
+  local current_width = max_width - (max_width - min_width) * progress
+
+  -- update the width of the progress bar
+  progress_bar.width = current_width
+end
+
+local function on_enter_frame()
+  elapsed_time = os.time() - start_time -- calculate the elapsed time
+  if elapsed_time >= total_time then
+    -- the timer is finished
+    print("Timer complete!")
+    --omogucavamo deljenje podataka kroz scene/datoteke programa
+    composer.setVariable("score", score) 
+    Runtime:removeEventListener("enterFrame", on_enter_frame)
+    progress_bar.width = 0 -- set the progress bar width to 0
+    gotoTimeIsUp()
+  else
+    update_progress_bar()
+  end
+end
+
+local function gotoWrongChoice()
+  utilities:playSound(_click) 
+  Runtime:removeEventListener("enterFrame", on_enter_frame)
+  progress_bar.width = 0
+  composer.gotoScene("scenes.wrongChoice")
+  _grpMain = display.newGroup()
 end
 
 local function SP2()
   local tablesGroup = display.newGroup()
   _lblTapToStart.alpha = 0
 
-  local start_time = os.time() -- record the start time
-  local total_time = 5 -- set the total time for the timer in seconds
-  local elapsed_time = 0 -- initialize the elapsed time to zero
-
-  local function on_enter_frame()
-    local elapsed_time = os.time() - start_time -- calculate the elapsed time
-    if elapsed_time >= total_time then
-        -- the timer is finished
-        print("Timer complete!")
-        progress_bar.width = 0 -- set the progress bar width to 0
-        Runtime:removeEventListener("enterFrame", on_enter_frame)
-    else
-        local progress = elapsed_time / total_time -- calculate progress as a fraction between 0 and 1
-        local max_width = 2*display.contentWidth + 200  -- set the maximum width of the progress bar
-        local min_width = 0 -- set the minimum width of the progress bar
-
-        -- calculate the current width of the progress bar as a function of the progress
-        local current_width = max_width - (max_width - min_width) * progress
-
-        -- update the width of the progress bar
-        progress_bar.width = current_width
-    end
-  end
+  start_time = os.time() -- record the start time
 
   Runtime:addEventListener("enterFrame", on_enter_frame)
 
@@ -229,12 +236,15 @@ local function SP2()
     if(trueColorName == randomColors[i]) then
       score = score + 1
       rectOptions[i]:addEventListener("tap", SP2)
+      break
     end
   end
 
   --Izabrana je pogresna boja
   for i = 1, #randomColors do
     if(trueColorName ~= randomColors[i]) then
+      --omogucavamo deljenje podataka kroz scene/datoteke programa
+      composer.setVariable("score", score) 
       rectOptions[i]:addEventListener("tap", gotoWrongChoice)
     end
   end
@@ -260,6 +270,9 @@ function scene:create(event)
 
   self.view:insert(_grpMain)
 
+  --reset the values
+  score = 0
+
   if utilities:checkBackground() == "white" then
     background = display.newImageRect(_grpMain, "ColorUpAssets/assets/images/black.png", _W, _H)
   else
@@ -280,7 +293,6 @@ function scene:create(event)
   progress_bar.x = _CX
   progress_bar.y = _CY + _CY/2
 
-  score = 0  --reset the score when playing the game for the first time or after failure
   _lblTapToStart:addEventListener("tap", gotoSP2)  
 end
 

@@ -67,27 +67,27 @@ function scene:create(event)
     background.y = _CY
 
     --Message
-    local _lblMessage = display.newText("Wrong choice!", _CX, _CY - 100, "assets/fonts/Galada.ttf", 46)
+    local _lblMessage = display.newText("Time is up!", _CX, _CY - 100, "assets/fonts/Galada.ttf", 46)
     _lblMessage.fill = {1, 51/255, 51/255}
     _grpMain:insert(_lblMessage)
 
     --Score
-    local _lblMessage = display.newText("Score = ", _CX - 20, _CY, "assets/fonts/Galada.ttf", 46)
+    local _lblMessage = display.newText("Score = ", _CX - 10, _CY, "assets/fonts/Galada.ttf", 46)
     _lblMessage.fill = theme
     local score = composer.getVariable("score")
     score = math.log(score) / math.log(2) --treba logaritmovati sa osnovom 2 da bi se dobio pravi broj
-    local _scoreStr = display.newText(score, _CX + 80, _CY, "assets/fonts/Galada.ttf", 46)
+    local _scoreStr = display.newText(score, _CX + 90, _CY, "assets/fonts/Galada.ttf", 46)
     _scoreStr.fill = theme
     _grpMain:insert(_lblMessage)
     _grpMain:insert(_scoreStr)
 
     --Play again
-    local btnPlayAgain = display.newRoundedRect(_grpMain, _CX - 80, _CY + 100, 140, 60,20)
+    local btnPlayAgain = display.newRoundedRect(_grpMain, _CX - 80, _CY + 130, 140, 60,20)
     btnPlayAgain.fill = theme
     btnPlayAgain.alpha = 0.4;
     _grpMain:insert(btnPlayAgain)
 
-    local lblPlayAgain = display.newText("Play again", _CX - 80, _CY + 100, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
+    local lblPlayAgain = display.newText("Play again", _CX - 80, _CY + 130, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
     lblPlayAgain.fill = theme
     _grpMain:insert(lblPlayAgain)
 
@@ -95,11 +95,11 @@ function scene:create(event)
 
 
     --Main menu
-    local btnMainMenu = display.newRoundedRect(_grpMain, _CX + 80, _CY + 100, 140, 60,20)
+    local btnMainMenu = display.newRoundedRect(_grpMain, _CX + 80, _CY + 130, 140, 60,20)
     btnMainMenu.fill = theme
     btnMainMenu.alpha = 0.4;
 
-    local lblMainMenu = display.newText("Main menu", _CX + 80, _CY + 100, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
+    local lblMainMenu = display.newText("Main menu", _CX + 80, _CY + 130, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
     lblMainMenu.fill = theme
     _grpMain:insert(lblMainMenu)
 
