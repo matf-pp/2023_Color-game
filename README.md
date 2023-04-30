@@ -12,4 +12,4 @@ Koriscen je programski jezik Lua
 
 Authors:
 
-<a href=https://github.com/matf-pp/2023_Color-game/edit/main> Ja sam</a>
+<a href=https://github.com/LukaFilipovic471>Luka Filipovic</a>
