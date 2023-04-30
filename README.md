@@ -10,4 +10,6 @@ File - clear project sandbox
 
 Koriscen je programski jezik Lua
 
-#Authors
+Authors:
+
+<a href=https://github.com/matf-pp/2023_Color-game/edit/main> Ja sam</a>
