@@ -13,3 +13,7 @@ Koriscen je programski jezik Lua
 Authors:
 
 <a href=https://github.com/LukaFilipovic471>Luka Filipovic</a>
+
+<a href=https://github.com/pepi151101>Petra Ignjatovic</a>
+
+<a href=https://github.com/StefanJevtic63>Stefan Jevtic</a>
