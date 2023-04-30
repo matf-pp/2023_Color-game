@@ -7,3 +7,7 @@ Linux: sudo snap install solar2d
 
 Ako se projekat spusta tokom pokretanja unutar solar2d launcher-a:
 File - clear project sandbox
+
+Koriscen je programski jezik Lua
+
+#Authors
