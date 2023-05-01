@@ -1,4 +1,7 @@
 # 2023_Color-game
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/096d2378b09e49b28a4cc74805362bf7)](https://app.codacy.com/gh/matf-pp/2023_Color-game?utm_source=github.com&utm_medium=referral&utm_content=matf-pp/2023_Color-game&utm_campaign=Badge_Grade)
+
 Na ekranu se pojavljuju boje koje su ispisane slovima u nekoj boji. Korisnik treba da klikne na polje ako je npr. rec crvena napisana crvenim slovima, u suprotnom ne klikce polje
 
 ---
