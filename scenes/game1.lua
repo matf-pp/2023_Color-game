@@ -66,6 +66,10 @@ local tableRect
 
 -- Local functions
 
+if utilities:checkMusic() then
+  utilities:playSound(music)
+end
+
 local function on_table_tap()
   --negativePoints()
   if((randomColor=="crvena" and fillStr==clrRed) or 
@@ -77,10 +81,10 @@ local function on_table_tap()
      (randomColor=="narandzasta" and fillStr==clrOrange) or
      (randomColor=="bela" and fillStr==clrWhite) or
      (randomColor=="crna" and fillStr==clrBlack)) then
-      utilities:playSound(wrong)
+      utilities:playSound(correct)
     number = number + 1
      else
-      utilities:playSound(correct)
+      utilities:playSound(wrong)
       number = number - 1
   end
 
@@ -259,7 +263,6 @@ function scene:create(event)
     print("scene:create - menu")
     _grpMain = display.newGroup()
 
-    utilities:playMusic(music)
 
     self.view:insert(_grpMain)
 

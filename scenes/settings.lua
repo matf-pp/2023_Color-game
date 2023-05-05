@@ -20,7 +20,7 @@ local scene = composer.newScene()
 local _grpMain
 
 -- Sounds
-local JEBEMTI = audio.loadSound("ColorUpAssets/assets/sounds/loop1.mp3")
+local bez_sekiracije = audio.loadSound("ColorUpAssets/assets/sounds/click.mp3")
 
 -- Buttons
 local _lblSoundsButton
@@ -46,7 +46,7 @@ end
 
 local function gotoMenu()
 
-    utilities:playSound(_sndClick)
+    utilities:playSound(bez_sekiracije)
 
     composer.gotoScene("scenes.menu")
 end
@@ -54,6 +54,7 @@ end
 local function toggleSounds()
 
     utilities:toggleSounds()
+    utilities:playSound(bez_sekiracije)
 
     _lblSoundsButton.text = utilities:checkSounds()
 end
@@ -61,6 +62,7 @@ end
 local function toggleMusic()
 
     utilities:toggleMusic()
+    utilities:playSound(bez_sekiracije)
 
     _lblMusicButton.text = utilities:checkMusic()
 
@@ -75,6 +77,7 @@ end
 local function changeBackground()
 
     utilities:changeBackground()
+    utilities:playSound(bez_sekiracije)
 
     if utilities:checkBackground() == "white" then
         composer.gotoScene("scenes.settings2")
