@@ -23,7 +23,7 @@ local scene = composer.newScene()
 local _grpMain
 
 --Sounds
-local _click = audio.loadStream("assets/sounds/click.wav")
+local _click = audio.loadStream("ColorUpAssets/assets/sounds/click.wav")
 
 --Colors
 local colors = {"crvena", "zelena", "plava", "zuta", "ljubicasta", "braon", "narandzasta", "bela"}
@@ -229,7 +229,7 @@ local function SP2()
   local rectOption4 = showOptions(4)
 
   local rectOptions = {rectOption1, rectOption2, rectOption3, rectOption4}
-  local randomColors = {randomColor1, randomColro2, randomColor3, randomColor4}
+  local randomColors = {randomColor1, randomColor2, randomColor3, randomColor4}
 
   --Proveri koja boja od opcija sadrzi tacnu boju
   for i = 1, #randomColors do

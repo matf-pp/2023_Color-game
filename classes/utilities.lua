@@ -25,6 +25,16 @@ if not db.background then
     db:save()
 end
 
+if not db.highscore then
+    db:set("highscore", 0)
+    db:save()
+end
+
+if not db.tmpscore then
+    db:set("tmpscore", 0)
+    db:save()
+end
+
 -- Sounds
 
 function utilities:playSound(sound)
@@ -92,6 +102,34 @@ function utilities:changeBackground()
     db:save()
 end
 
+
+function utilities:getHighscore()
+
+    return db.highscore
+end
+
+function utilities:setHighscore(score)
+
+    if db.tmpscore > db.highscore then
+        db:set("highscore", db.tmpscore)
+        db:save()
+
+        return true
+    else
+        return false
+    end
+end
+
+function utilities:getTmpScore()
+
+    return db.tmpscore
+end
+
+function utilities:setTmpScore(score)
+
+    db:set("tmpscore", score)
+    db:save()
+end
 
 
 -- Return

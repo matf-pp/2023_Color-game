@@ -4,6 +4,7 @@ local composer = require("composer")
 local relayout = require("ColorUpAssets.libs.relayout")
 local utilities = require("classes.utilities")
 local transition2 = require("ColorUpAssets.transition2")
+local gc = require("classes.helper_gamecenter")
 
 -- Set variables
 
@@ -49,7 +50,7 @@ local colors = {
 -- Local functions
 
 local function gotoGame1()
-    utilities:playSound(_click)  
+    utilities:playSound(bez_sekiranja)  
     composer.gotoScene("scenes.game1")  --scenes.game1 je ono sto treba da se uradi
     print("scene:create -")
     _grpMain = display.newGroup()
@@ -58,7 +59,7 @@ local function gotoGame1()
 end
 
 local function gotoGame2()
-     utilities:playSound(_click) 
+     utilities:playSound(bez_sekiranja) 
      composer.gotoScene("scenes.game2") --scenes.game2 je ono sto treba da se uradi
      print("scene:create -")
      _grpMain = display.newGroup()
@@ -66,7 +67,7 @@ local function gotoGame2()
 
  local function gotoSettings()
 
-    utilities:playSound(_click)
+    utilities:playSound(bez_sekiranja)
     composer.gotoScene( "scenes.settings" )
 
     if utilities:checkBackground() == "white" then
@@ -77,6 +78,8 @@ local function gotoGame2()
 end
 
  local function gotoEasterEgg()
+
+    utilities:playSound(bez_sekiranja)  
 
     Rect1.fill = colors[math.random(1,table.getn(colors)-1)]
     lblTitle.fill = colors[math.random(1,table.getn(colors)-1)]
@@ -117,7 +120,7 @@ end
 end
 
 local function gotoInstructions()
-    utilities:playSound(_click) 
+    utilities:playSound(bez_sekiranja) 
      composer.gotoScene("scenes.instructions") --scenes.game2 je ono sto treba da se uradi
      _grpMain = display.newGroup()
 
@@ -151,33 +154,31 @@ function scene:create(event)
     lblTitle.fill = theme
     _grpMain:insert(lblTitle)
 
-    local btnPlay1 = display.newRoundedRect(_grpMain, _CX, _CY-100, 240, 50,20)
+    local btnPlay1 = display.newRoundedRect(_grpMain, _CX, _CY-90, 240, 50,20)
     btnPlay1.fill = theme
     btnPlay1.alpha = 0.4;
 
-    local lblPlay1 = display.newText("Play - mode 1", _CX, _CY-100, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
+    local lblPlay1 = display.newText("Play - mode 1", _CX, _CY-90, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
     lblPlay1.fill = theme
     _grpMain:insert(lblPlay1)
 
-    btnPlay1:addEventListener("tap", gotoGame1)  --gotoGame1 nije spremljeno jos
+    btnPlay1:addEventListener("tap", gotoGame1)  
 
-    local btnPlay2 = display.newRoundedRect(_grpMain, _CX, _CY, 240, 50,20)
+    local btnPlay2 = display.newRoundedRect(_grpMain, _CX, _CY-20, 240, 50,20)
     btnPlay2.fill = theme
     btnPlay2.alpha = 0.4;
 
-    local lblPlay2 = display.newText("Play - mode 2", _CX, _CY+3, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
+    local lblPlay2 = display.newText("Play - mode 2", _CX, _CY-20, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
     lblPlay2.fill = theme
     _grpMain:insert(lblPlay2)
 
-    btnPlay2:addEventListener("tap", gotoGame2)  --gotoGame2 nije spremljeno jos
+    btnPlay2:addEventListener("tap", gotoGame2) 
 
-    Rect1 = display.newRoundedRect(50,50,240,50,20)
+    Rect1 = display.newRoundedRect(_grpMain, _CX, _CY+50, 240, 50,20)
     Rect1.fill = colors[math.random(1,table.getn(colors))]
-    Rect1.x = _CX
-    Rect1.y = _CY+90
-    _grpMain:insert(Rect1)
+    
 
-    local lblIndex = display.newText("187/83/63", _CX, _CY+90, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
+    local lblIndex = display.newText("187/83/63", _CX, _CY+50, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
     lblIndex.fill = theme
     _grpMain:insert(lblIndex)
 
@@ -194,6 +195,19 @@ function scene:create(event)
     _grpMain:insert(lblSettings)
 
     lblSettings:addEventListener("tap", gotoSettings) 
+
+    local btnLeaderboards = display.newRoundedRect(_grpMain, _CX, _CY+120, 240, 50,20)
+    btnLeaderboards.fill = theme
+    btnLeaderboards.alpha = 0.4;
+
+    local lblLeaderboards = display.newText("Leaderboards", _CX, _CY+120, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
+    lblLeaderboards.fill = theme 
+    _grpMain:insert(lblLeaderboards)
+
+    lblLeaderboards:addEventListener("tap", function()
+        utilities:playSound(bez_sekiranja)  
+        gc:openLeaderboard()
+    end)
 
 end
 

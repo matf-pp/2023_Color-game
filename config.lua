@@ -4,23 +4,21 @@
 --
 
 local aspectRatio = display.pixelHeight / display.pixelWidth
-local width = display.pixelWidth
-local height = display.pixelHeight
+local width = 360
+local height = width * aspectRatio
 
 application =
 {
 	content =
 	{
-		width = 320,
-		height = 480, 
+		width = width,
+		height = height, 
 		scale = "letterbox",
 		fps = 60,
-		
 		
 		imageSuffix =
 		{
 			    ["@2x"] = 2,
 		},
-		
 	},
 }
