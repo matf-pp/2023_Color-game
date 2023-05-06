@@ -15,6 +15,8 @@ A game where your cognitive abilities are taken to the test, with colors!
 
 ## Run Color game 
 
+The game was written in [Lua](https://www.lua.org/) programming language.
+
 ### Linux (Ubuntu)
 
 You will need Solar2d:
