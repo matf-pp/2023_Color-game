@@ -152,7 +152,7 @@ function scene:create(event)
     _grpConfetti = display.newGroup()
     _grpMain:insert(_grpConfetti)
 
-    lblTitle = display.newText("Color Game", _CX, 70, "ColorUpAssets/assets/fonts/Galada.ttf",50)
+    lblTitle = display.newText("Color Game", _CX, 60, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf",60)
     lblTitle.fill = theme
     _grpMain:insert(lblTitle)
 

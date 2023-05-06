@@ -80,7 +80,7 @@ function scene:create(event)
     lblPlay1.fill = theme
     _grpMain:insert(lblPlay1)
 
-    local lblBack = display.newText("Nazad", _CX+100, _H-80, "ColorUpAssets/assets/fonts/OpenDyslexic-Regular.otf", 26)
+    local lblBack = display.newText("Nazad", _CX+100, _H-80, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 30)
     lblBack.fill = theme
     _grpMain:insert(lblBack)
     lblBack:addEventListener("tap", gotoMenu)

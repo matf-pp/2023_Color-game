@@ -62,32 +62,42 @@ function scene:create(event)
     background.y = _CY
 
     --Message
-    local _lblMessage = display.newText("Leaderboard", _CX, 70, "ColorUpAssets/assets/fonts/Galada.ttf", 46)
-    _lblMessage.fill = {51/255, 204/255, 204/255}
+    local _lblMessage = display.newText("Leaderboard", _CX, 60, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
+    _lblMessage.fill = theme
     _grpMain:insert(_lblMessage)
 
     --Highscores
-    local currentHighscore = composer.getVariable("currentHighscore")
+    local currentHighscore = composer.getVariable("currentScore")
 
     --if currentHighscore doesnt exist, set it to 0
     if currentHighscore == nil then
         currentHighscore = 0
     end
 
-    table.insert(highscoreList, currentHighscore)
-    table.sort(highscoreList, compare)
 
-    if #highscoreList > 1 then
+    local currentHighscoreList = utilities:getHighscoreList()
+
+    table.insert(currentHighscoreList,currentHighscore)
+    table.sort(currentHighscoreList, function(a, b) return a > b end)
+
+    utilities:setHighscoreList(currentHighscoreList)
+
+    local height = #currentHighscoreList
+    if height > 5 then
+        height = 5
+    end
+
+    if #currentHighscoreList > 1 then
         --display highscores in descending order
-        for i=1, #highscoreList do
+        for i=1, height do
             --display the current index (i)
-            local lblNum = display.newText(i, X1, 150 - (i-1)*Y_offset, "ColorUpAssets/assets/fonts/Galada.ttf", 46)
+            local lblNum = display.newText(i, X1, 150 + (i-1)*Y_offset, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 46)
             lblNum.fill = theme
-            local lblPoint = display.newText(".", X1 + 5, 150 - (i-1)*Y_offset, "ColorUpAssets/assets/fonts/Galada.ttf", 46)
+            local lblPoint = display.newText(":", X1 + 10, 150 + (i-1)*Y_offset, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 46)
             lblPoint.fill = theme
 
             --display the highscore
-            local lblScore = display.newText(highscoreList[i], X2, 150 - (i-1)*Y_offset, "ColorUpAssets/assets/fonts/Galada.ttf", 46)
+            local lblScore = display.newText(currentHighscoreList[i], X2, 150 + (i-1)*Y_offset, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 46)
             lblScore.fill = theme
 
             _grpMain:insert(lblNum)
@@ -95,12 +105,12 @@ function scene:create(event)
             _grpMain:insert(lblScore)
         end
     else
-        local lblNum = display.newText(1, X1 + 50, _CY - 50, "ColorUpAssets/assets/fonts/Galada.ttf", 46)
+        local lblNum = display.newText(1, X1 + 50, _CY - 50, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 46)
         lblNum.fill = theme
-        local lblPoint = display.newText(".", X1 + 65, _CY - 50, "ColorUpAssets/assets/fonts/Galada.ttf", 46)
+        local lblPoint = display.newText(":", X1 + 65, _CY - 50, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 46)
         lblPoint.fill = theme
 
-        local lblScore = display.newText(currentHighscore, X2 + 50, _CY - 50, "ColorUpAssets/assets/fonts/Galada.ttf", 46)
+        local lblScore = display.newText(currentHighscore, X2 + 50, _CY - 50, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 46)
         lblScore.fill = theme
 
         _grpMain:insert(lblNum)
@@ -109,11 +119,11 @@ function scene:create(event)
     end
 
     --Main menu
-    local btnMainMenu = display.newRoundedRect(_grpMain, _CX, _CY+120, 240, 50,20)
+    local btnMainMenu = display.newRoundedRect(_grpMain, _CX, _CY+180, 240, 50,20)
     btnMainMenu.fill = theme
     btnMainMenu.alpha = 0.4;
 
-    local lblMainMenu = display.newText("Main menu", _CX, _CY + 120, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
+    local lblMainMenu = display.newText("Main menu", _CX, _CY + 180, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
     lblMainMenu.fill = theme
     _grpMain:insert(lblMainMenu)
 

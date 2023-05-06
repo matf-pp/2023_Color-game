@@ -66,8 +66,10 @@ local tableRect
 
 -- Local functions
 
-if utilities:checkMusic() then
-  utilities:playSound(music)
+if utilities:checkMusic() == "On" then
+  utilities:playMusic(music)
+else
+  audio.stop()
 end
 
 local function on_table_tap()
@@ -213,14 +215,14 @@ function SP1()
   randomColor = colors[randomNumber1]
   randomNumber2 = math.random(1,table.getn(colorsArray)-1)
 
-  Score = display.newText(tablesGroup, "Score: ", 0, -80, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 45)
+  Score = display.newText(tablesGroup, "Score: ", -20, -80, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 45)
   Score.fill = theme
   numberStr = display.newText(tablesGroup, number, 70, -80, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf",45)
   numberStr.fill = theme
 
   local nextRect = display.newRect(tablesGroup, 0, 200, 150, 40)
   nextRect.fill = theme
-  Next = display.newText(tablesGroup, "Next", 0, 200, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 40)
+  Next = display.newText(tablesGroup, "Next", 0, 200, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
   Next:setFillColor(0.2, 0.3, 0.4)
 
   tableRect = display.newRect(tablesGroup, 0, 100, 250, 80)

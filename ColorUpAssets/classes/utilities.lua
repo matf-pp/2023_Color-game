@@ -7,7 +7,6 @@ local GGData = require("ColorUpAssets.libs.GGData")
 local utilities = {}
 local db = GGData:new("db")
 
-
 -- Init db
 
 if not db.sounds then       --if this doesn't exist, create it
@@ -34,6 +33,12 @@ if not db.tmpscore then
     db:set("tmpscore", 0)
     db:save()
 end
+
+if not db.highscoreList then
+    db:set("highscoreList", {})
+    db:save()
+end
+
 
 -- Sounds
 
@@ -129,6 +134,19 @@ function utilities:setTmpScore(score)
 
     db:set("tmpscore", score)
     db:save()
+end
+
+function utilities:getHighscoreList()
+    
+    return db.highscoreList
+
+end
+
+function utilities:setHighscoreList(currentHighscoreList)
+
+    db:set("highscoreList", currentHighscoreList)
+    db:save()
+
 end
 
 

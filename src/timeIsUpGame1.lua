@@ -100,11 +100,11 @@ function scene:create(event)
 
     --
 
+    composer.setVariable("currentScore", utilities:getTmpScore())
+
     if isHighscore then
         --get current highscore
-        currentHighscore = utilities:getHighscore()
-        --send it to the leaderboard
-        composer.setVariable("currentHighscore", currentHighscore)
+        local currentHighscore = utilities:getHighscore()
 
         utilities:playSound(fanfare)
         local lblHighscore = display.newText("HIGHSCORE!", _CX, _CY - 200, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
