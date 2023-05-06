@@ -2,7 +2,7 @@
 -- Import
 
 local json = require("json")
-local utilities = require("classes.utilities")
+local utilities = require("ColorUpAssets.classes.utilities")
 
 --
 --

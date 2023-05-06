@@ -1,8 +1,8 @@
 -- Import
 
 local composer = require("composer")
-local relayout = require("libs.relayout")
-local utilities = require("classes.utilities")
+local relayout = require("ColorUpAssets.libs.relayout")
+local utilities = require("ColorUpAssets.classes.utilities")
 
 --Layout
 local _W, _H, _CX, _CY = relayout._W, relayout._H, relayout._CX, relayout._CY
@@ -108,7 +108,7 @@ end
 local function gotoTimeIsUp()
   utilities:playSound(timeisup) 
   progress_bar.width = 0
-  composer.gotoScene("scenes.timeIsUpGame1")
+  composer.gotoScene("src.timeIsUpGame1")
   _grpMain = display.newGroup()
 end
 
@@ -218,9 +218,9 @@ function SP1()
   numberStr = display.newText(tablesGroup, number, 70, -80, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf",45)
   numberStr.fill = theme
 
-  local nextRect = display.newRect(tablesGroup, 90, 200, 150, 40)
+  local nextRect = display.newRect(tablesGroup, 0, 200, 150, 40)
   nextRect.fill = theme
-  Next = display.newText(tablesGroup, "Next", 90, 200, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 40)
+  Next = display.newText(tablesGroup, "Next", 0, 200, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 40)
   Next:setFillColor(0.2, 0.3, 0.4)
 
   tableRect = display.newRect(tablesGroup, 0, 100, 250, 80)

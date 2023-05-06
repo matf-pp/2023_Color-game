@@ -1,8 +1,8 @@
 -- Import
 
 local composer = require("composer")
-local relayout = require("libs.relayout")
-local utilities = require("classes.utilities")
+local relayout = require("ColorUpAssets.libs.relayout")
+local utilities = require("ColorUpAssets.classes.utilities")
 
 -- Set variables
 
@@ -16,7 +16,7 @@ local scene = composer.newScene()
 local _grpMain
 
 --Sounds
-local _click = audio.loadStream("assets/sounds/click.wav")
+local _click = audio.loadStream("ColorUpAssets/assets/sounds/click.wav")
 
 
 -- Local functions

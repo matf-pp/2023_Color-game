@@ -2,9 +2,9 @@
 
 local composer = require("composer")
 local relayout = require("ColorUpAssets.libs.relayout")
-local utilities = require("classes.utilities")
+local utilities = require("ColorUpAssets.classes.utilities")
 local transition2 = require("ColorUpAssets.transition2")
-local gc = require("classes.helper_gamecenter")
+local gc = require("ColorUpAssets.classes.helper_gamecenter")
 
 -- Set variables
 
@@ -31,8 +31,8 @@ local scene = composer.newScene()
 local _grpMain
 local _grpConfetti
 
---Sounds --Easy man
-local bez_sekiranja = audio.loadSound("ColorUpAssets/assets/sounds/click.wav")
+--Sounds
+local _click = audio.loadStream("ColorUpAssets/assets/sounds/click.wav")
 
 --Colors
 local colors = {
@@ -50,36 +50,34 @@ local colors = {
 -- Local functions
 
 local function gotoGame1()
-    utilities:playSound(bez_sekiranja)  
-    composer.gotoScene("scenes.game1")  --scenes.game1 je ono sto treba da se uradi
+    utilities:playSound(_click)  
+    composer.gotoScene("src.game1")
     print("scene:create -")
     _grpMain = display.newGroup()
-
-
 end
 
 local function gotoGame2()
-     utilities:playSound(bez_sekiranja) 
-     composer.gotoScene("scenes.game2") --scenes.game2 je ono sto treba da se uradi
+     utilities:playSound(_click) 
+     composer.gotoScene("src.game2")
      print("scene:create -")
      _grpMain = display.newGroup()
  end
 
  local function gotoSettings()
 
-    utilities:playSound(bez_sekiranja)
-    composer.gotoScene( "scenes.settings" )
+    utilities:playSound(_click)
+    composer.gotoScene( "src.settings" )
 
     if utilities:checkBackground() == "white" then
-        composer.gotoScene( "scenes.settings2" )
+        composer.gotoScene( "src.settings2" )
     else
-        composer.gotoScene( "scenes.settings" ) 
+        composer.gotoScene( "src.settings" ) 
     end
 end
 
  local function gotoEasterEgg()
 
-    utilities:playSound(bez_sekiranja)  
+    utilities:playSound(_click)  
 
     Rect1.fill = colors[math.random(1,table.getn(colors)-1)]
     lblTitle.fill = colors[math.random(1,table.getn(colors)-1)]
@@ -120,13 +118,17 @@ end
 end
 
 local function gotoInstructions()
-    utilities:playSound(bez_sekiranja) 
-     composer.gotoScene("scenes.instructions") --scenes.game2 je ono sto treba da se uradi
+    utilities:playSound(_click) 
+     composer.gotoScene("src.instructions")
      _grpMain = display.newGroup()
 
 end
 
-
+local function gotoLeaderboards()
+    utilities:playSound(_click) 
+    composer.gotoScene("src.leaderboards")
+    _grpMain = display.newGroup()
+end
 
 -- Scene events functions
 
@@ -150,7 +152,7 @@ function scene:create(event)
     _grpConfetti = display.newGroup()
     _grpMain:insert(_grpConfetti)
 
-    lblTitle = display.newText("Color Game", _CX, 50, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf",70)
+    lblTitle = display.newText("Color Game", _CX, 70, "ColorUpAssets/assets/fonts/Galada.ttf",50)
     lblTitle.fill = theme
     _grpMain:insert(lblTitle)
 
@@ -185,12 +187,12 @@ function scene:create(event)
 
     Rect1:addEventListener("tap", gotoEasterEgg)
 
-    local lblInstructions = display.newText("Kako?", _CX-70, _H-80, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 35)
+    local lblInstructions = display.newText("Kako?", _CX-100, _H-60, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 35)
     lblInstructions.fill = theme
     _grpMain:insert(lblInstructions)
     lblInstructions:addEventListener("tap", gotoInstructions) 
     
-    local lblSettings = display.newText("Podesavanja", _CX+100, _H-80, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 35)
+    local lblSettings = display.newText("Podesavanja", _CX+80, _H-60, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 35)
     lblSettings.fill = theme
     _grpMain:insert(lblSettings)
 
@@ -204,11 +206,7 @@ function scene:create(event)
     lblLeaderboards.fill = theme 
     _grpMain:insert(lblLeaderboards)
 
-    lblLeaderboards:addEventListener("tap", function()
-        utilities:playSound(bez_sekiranja)  
-        gc:openLeaderboard()
-    end)
-
+    lblLeaderboards:addEventListener("tap", gotoLeaderboards)
 end
 
 function scene:show(event)

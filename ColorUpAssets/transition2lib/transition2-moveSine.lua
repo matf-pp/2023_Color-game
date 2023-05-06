@@ -27,7 +27,7 @@ Markus Ranner 2017
 
 --]]
 
-local utils = require("transition2lib.utils")
+local utils = require("ColorUpAssets.transition2lib.utils")
 
 local function calculateStartOffset(params)
     return {

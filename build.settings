@@ -37,7 +37,7 @@ settings =
 	--
 	iphone =
 	{
-		xcassets = "Images.xcassets",
+		xcassets = "ColorUpAssets/Images.xcassets",
 		plist =
 		{
 			UIStatusBarHidden = false,
@@ -67,7 +67,7 @@ settings =
 	excludeFiles =
 	{
 		-- Exclude unnecessary files for each platform
-		all = { "Icon.png", "Icon-*dpi.png", "Images.xcassets", },
-		android = { "LaunchScreen.storyboardc", },
+		all = { "ColorUpAssets/assets/images/Icon.png", "ColorUpAssets/assets/images/Icon-*dpi.png", "ColorUpAssets/Images.xcassets", },
+		android = { "ColorUpAssets/LaunchScreen.storyboardc", },
 	},
 }

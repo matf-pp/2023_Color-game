@@ -1,8 +1,8 @@
 -- Import
 
 local composer = require("composer")
-local relayout = require("libs.relayout")
-local utilities = require("classes.utilities")
+local relayout = require("ColorUpAssets.libs.relayout")
+local utilities = require("ColorUpAssets.classes.utilities")
 
 --Layout
 local _W, _H, _CX, _CY = relayout._W, relayout._H, relayout._CX, relayout._CY
@@ -53,7 +53,7 @@ math.randomseed(133)
 local function gotoTimeIsUp()
   utilities:playSound(_click) 
   progress_bar.width = 0
-  composer.gotoScene("scenes.timeIsUp")
+  composer.gotoScene("src.timeIsUpGame2")
   _grpMain = display.newGroup()
 end
 
@@ -138,7 +138,7 @@ local function gotoWrongChoice()
   utilities:playSound(_click) 
   Runtime:removeEventListener("enterFrame", on_enter_frame)
   progress_bar.width = 0
-  composer.gotoScene("scenes.wrongChoice")
+  composer.gotoScene("src.wrongChoiceGame2")
   _grpMain = display.newGroup()
 end
 
@@ -282,7 +282,7 @@ function scene:create(event)
   background.x = _CX
   background.y = _CY
 
-  _lblTapToStart = display.newText("Tap to start", _CX, _CY, "assets/fonts/Galada.ttf", 46)
+  _lblTapToStart = display.newText("Tap to start", _CX, _CY, "ColorUpAssets/assets/fonts/Galada.ttf", 46)
   _lblTapToStart.fill = theme
   _grpMain:insert(_lblTapToStart)
   _lblTapToStart.x = _CX

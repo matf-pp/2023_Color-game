@@ -1,11 +1,11 @@
 -- Import
 
 local composer = require("composer")
-local relayout = require("libs.relayout")
-local utilities = require("classes.utilities")
-local transition2 = require("transition2")
+local relayout = require("ColorUpAssets.libs.relayout")
+local utilities = require("ColorUpAssets.classes.utilities")
+local transition2 = require("ColorUpAssets.transition2")
 
-local gc = require("classes.helper_gamecenter")
+local gc = require("ColorUpAssets.classes.helper_gamecenter")
 
 -- Set variables
 
@@ -38,19 +38,21 @@ local fanfare = audio.loadStream("ColorUpAssets/assets/sounds/fanfare.mp3")
 -- Local functions
 local function gotoPlayAgain()
     utilities:playSound(_click) 
-    composer.gotoScene("scenes.game1")
+    composer.gotoScene("src.game1")
     print("scene:create -")
-   -- _grpMain = display.newGroup()
 end
 
 local function gotoMainMenu()
     utilities:playSound(_click) 
-    composer.gotoScene("scenes.menu")
+    composer.gotoScene("src.menu")
     print("scene:create -")
-   -- _grpMain = display.newGroup()
 end
 
-
+local function gotoLeaderboards()
+    utilities:playSound(_click) 
+    composer.gotoScene("src.leaderboards")
+    _grpMain = display.newGroup()
+end
 -- Scene events functions
 
 function scene:create(event)
@@ -59,13 +61,7 @@ function scene:create(event)
 
     utilities:playSound(timeisup)
 
-
-
     self.view:insert(_grpMain)
-
-    -- --resetujemo progress bar na 0
-    -- local progress_bar = composer.getVariable("progress_bar")
-    -- progress_bar.width = 0
 
     _grpConfetti = display.newGroup()
     _grpMain:insert(_grpConfetti)
@@ -105,6 +101,11 @@ function scene:create(event)
     --
 
     if isHighscore then
+        --get current highscore
+        currentHighscore = utilities:getHighscore()
+        --send it to the leaderboard
+        composer.setVariable("currentHighscore", currentHighscore)
+
         utilities:playSound(fanfare)
         local lblHighscore = display.newText("HIGHSCORE!", _CX, _CY - 200, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
         lblHighscore.fill = theme
@@ -185,16 +186,6 @@ function scene:create(event)
 
     btnPlayAgain:addEventListener("tap", gotoPlayAgain)
 
-    --Leaderbords
-    local lblLeaderboards = display.newText("Leaderboards", _CX, _H - 40, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 26)
-    lblLeaderboards.fill = theme
-    _grpMain:insert(lblLeaderboards)
-
-    lblLeaderboards:addEventListener("tap", function()
-        gc:openLeaderboard()
-    end)
-
-
     --Main menu
     local btnMainMenu = display.newRoundedRect(_grpMain, _CX + 80, _CY + 130, 140, 60,20)
     btnMainMenu.fill = theme
@@ -205,6 +196,13 @@ function scene:create(event)
     _grpMain:insert(lblMainMenu)
 
     btnMainMenu:addEventListener("tap", gotoMainMenu)
+
+    --Leaderbords
+    local lblLeaderboards = display.newText("Leaderboards", _CX, _H - 40, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 46)
+    lblLeaderboards.fill = theme
+    _grpMain:insert(lblLeaderboards)
+
+    lblLeaderboards:addEventListener("tap", gotoLeaderboards)
 end
 
 function scene:show(event)

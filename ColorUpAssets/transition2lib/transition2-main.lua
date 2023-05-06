@@ -4,7 +4,7 @@ Should NOT be altered when just implementing new custom transition functions.
 
 Markus Ranner 2017
 --]]
-local utils = require("transition2lib.utils")
+local utils = require("ColorUpAssets.transition2lib.utils")
 
 -- The transition2 module that will be populated with functions
 local transition2 = {}

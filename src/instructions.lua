@@ -1,8 +1,8 @@
 -- Import
 
 local composer = require("composer")
-local relayout = require("libs.relayout")
-local utilities = require("classes.utilities")
+local relayout = require("ColorUpAssets.libs.relayout")
+local utilities = require("ColorUpAssets.classes.utilities")
 
 -- Set variables
 
@@ -36,7 +36,7 @@ local _click = audio.loadStream("ColorUpAssets/assets/sounds/click.wav")
 
 local function gotoMenu()
     utilities:playSound(_click) 
-     composer.gotoScene("scenes.menu") --scenes.game2 je ono sto treba da se uradi
+     composer.gotoScene("src.menu") --src.game2 je ono sto treba da se uradi
      _grpMain = display.newGroup()
 
 end

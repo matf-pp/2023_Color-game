@@ -3,7 +3,7 @@
 
 local composer = require("composer")
 local relayout = require("ColorUpAssets.libs.relayout")
-local utilities = require("classes.utilities")
+local utilities = require("ColorUpAssets.classes.utilities")
 
 
 --
@@ -20,7 +20,7 @@ local scene = composer.newScene()
 local _grpMain
 
 -- Sounds
-local JEBEMTI = audio.loadSound("ColorUpAssets/assets/sounds/loop1.mp3")
+local bez_sekiracije = audio.loadSound("ColorUpAssets/assets/sounds/click.mp3")
 
 -- Buttons
 local _lblSoundsButton
@@ -46,14 +46,15 @@ end
 
 local function gotoMenu()
 
-    utilities:playSound(_sndClick)
+    utilities:playSound(bez_sekiracije)
 
-    composer.gotoScene("scenes.menu")
+    composer.gotoScene("src.menu")
 end
 
 local function toggleSounds()
 
     utilities:toggleSounds()
+    utilities:playSound(bez_sekiracije)
 
     _lblSoundsButton.text = utilities:checkSounds()
 end
@@ -61,11 +62,12 @@ end
 local function toggleMusic()
 
     utilities:toggleMusic()
+    utilities:playSound(bez_sekiracije)
 
     _lblMusicButton.text = utilities:checkMusic()
 
     if utilities:checkMusic() == "On" then
-        local music = audio.loadStream("assets/sounds/loop1.mp3")
+        local music = audio.loadStream("ColorUpAssets/assets/sounds/loop1.mp3")
         utilities:playMusic(music)
     else
         audio.stop()
@@ -75,9 +77,10 @@ end
 local function changeBackground()
 
     utilities:changeBackground()
+    utilities:playSound(bez_sekiracije)
 
-    if utilities:checkBackground() == "black" then
-        composer.gotoScene("scenes.settings")
+    if utilities:checkBackground() == "white" then
+        composer.gotoScene("src.settings2")
     end
 
 end
@@ -97,46 +100,45 @@ function scene:create( event )
     --
 
     -- Background
-    background = display.newImageRect(_grpMain, "ColorUpAssets/assets/images/black.png", _W, _H)
+    background = display.newImageRect(_grpMain, "ColorUpAssets/assets/images/white.png", _W, _H)
     background.x = _CX
     background.y = _CY
 
     -- Title
     title = display.newText("Podesavanja", _CX, 100, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
-    title.fill = {1,1,1}
+    title.fill = {0,0,0}
     _grpMain:insert(title)
 
     -- Sound title and button
     local lblSoundsTitle = display.newText("Zvuk", _CX-80, _CY-50, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 35)
-    lblSoundsTitle.fill = {1,1,1}
+    lblSoundsTitle.fill = {0,0,0}
     _grpMain:insert(lblSoundsTitle)
 
     _lblSoundsButton = display.newText(utilities:checkSounds(), _CX+80, _CY-50, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 45)
-    _lblSoundsButton.fill = {1,1,1}
+    _lblSoundsButton.fill = {0,0,0}
     _grpMain:insert(_lblSoundsButton)
 
     _lblSoundsButton:addEventListener("tap", toggleSounds)
 
     -- Music title and button
     local lblMusicTitle = display.newText("Muzika", _CX-80, _CY, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 35)
-    lblMusicTitle.fill = {1,1,1}
+    lblMusicTitle.fill = {0,0,0}
     _grpMain:insert(lblMusicTitle)
 
     _lblMusicButton = display.newText(utilities:checkMusic(), _CX + 80, _CY, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 45)
-    _lblMusicButton.fill = {1,1,1}
+    _lblMusicButton.fill = {0,0,0}
     _grpMain:insert(_lblMusicButton)
 
     _lblMusicButton:addEventListener("tap", toggleMusic)
 
     lblBackground = display.newText("Tema", _CX-80, _CY+50, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 35)
-    lblBackground.fill = {1,1,1}
+    lblBackground.fill = {0,0,0}
 
     Rect1 = display.newRoundedRect(_CX+80,_CY+50,50,50,20)
 
-    Rect1.fill = {0,0,0}
+    Rect1.fill = {1,1,1}
     Rect1.strokeWidth = 2
-    Rect1:setStrokeColor(1,1,1) -- set the stroke color to black
-
+    Rect1:setStrokeColor(0,0,0) -- set the stroke color to black
 
     _grpMain:insert(lblBackground)
     _grpMain:insert(Rect1)
@@ -145,7 +147,7 @@ function scene:create( event )
 
     -- Close button
     local lblBack = display.newText("Nazad", _CX+100, _H-80, "ColorUpAssets/assets/fonts/OpenDyslexic-Regular.otf", 26)
-    lblBack.fill = {1,1,1}
+    lblBack.fill = {0,0,0}
     _grpMain:insert(lblBack)
     lblBack:addEventListener("tap", gotoMenu)
 end

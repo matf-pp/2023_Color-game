@@ -48,7 +48,7 @@ Markus Ranner 2017
 
 --]]
 
-local utils = require("transition2lib.utils")
+local utils = require("ColorUpAssets.transition2lib.utils")
 
 local DEFAULT_SPEED = 0.5
 local DEFAULT_VERTICAL_INTENSITY = 0.5

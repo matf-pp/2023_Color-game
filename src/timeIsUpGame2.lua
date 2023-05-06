@@ -1,8 +1,8 @@
 -- Import
 
 local composer = require("composer")
-local relayout = require("libs.relayout")
-local utilities = require("classes.utilities")
+local relayout = require("ColorUpAssets.libs.relayout")
+local utilities = require("ColorUpAssets.classes.utilities")
 
 -- Set variables
 
@@ -26,22 +26,20 @@ local scene = composer.newScene()
 local _grpMain
 
 --Sounds
-local _click = audio.loadStream("assets/sounds/click.wav")
+local _click = audio.loadStream("ColorUpAssets/assets/sounds/click.wav")
 
 
 -- Local functions
 local function gotoPlayAgain()
     utilities:playSound(_click) 
-    composer.gotoScene("scenes.game2")
+    composer.gotoScene("src.game2")
     print("scene:create -")
-   -- _grpMain = display.newGroup()
 end
 
 local function gotoMainMenu()
     utilities:playSound(_click) 
-    composer.gotoScene("scenes.menu")
+    composer.gotoScene("src.menu")
     print("scene:create -")
-   -- _grpMain = display.newGroup()
 end
 
 
@@ -53,10 +51,6 @@ function scene:create(event)
 
     self.view:insert(_grpMain)
 
-    -- --resetujemo progress bar na 0
-    -- local progress_bar = composer.getVariable("progress_bar")
-    -- progress_bar.width = 0
-
     if utilities:checkBackground() == "white" then
       background = display.newImageRect(_grpMain, "ColorUpAssets/assets/images/black.png", _W, _H)
     else
@@ -67,27 +61,27 @@ function scene:create(event)
     background.y = _CY
 
     --Message
-    local _lblMessage = display.newText("Wrong choice!", _CX, _CY - 100, "assets/fonts/Galada.ttf", 46)
+    local _lblMessage = display.newText("Time is up!", _CX, _CY - 100, "ColorUpAssets/assets/fonts/Galada.ttf", 46)
     _lblMessage.fill = {1, 51/255, 51/255}
     _grpMain:insert(_lblMessage)
 
     --Score
-    local _lblMessage = display.newText("Score = ", _CX - 20, _CY, "assets/fonts/Galada.ttf", 46)
+    local _lblMessage = display.newText("Score = ", _CX - 10, _CY, "ColorUpAssets/assets/fonts/Galada.ttf", 46)
     _lblMessage.fill = theme
     local score = composer.getVariable("score")
     score = math.log(score) / math.log(2) --treba logaritmovati sa osnovom 2 da bi se dobio pravi broj
-    local _scoreStr = display.newText(score, _CX + 80, _CY, "assets/fonts/Galada.ttf", 46)
+    local _scoreStr = display.newText(score, _CX + 90, _CY, "ColorUpAssets/assets/fonts/Galada.ttf", 46)
     _scoreStr.fill = theme
     _grpMain:insert(_lblMessage)
     _grpMain:insert(_scoreStr)
 
     --Play again
-    local btnPlayAgain = display.newRoundedRect(_grpMain, _CX - 80, _CY + 100, 140, 60,20)
+    local btnPlayAgain = display.newRoundedRect(_grpMain, _CX - 80, _CY + 130, 140, 60,20)
     btnPlayAgain.fill = theme
     btnPlayAgain.alpha = 0.4;
     _grpMain:insert(btnPlayAgain)
 
-    local lblPlayAgain = display.newText("Play again", _CX - 80, _CY + 100, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
+    local lblPlayAgain = display.newText("Play again", _CX - 80, _CY + 130, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
     lblPlayAgain.fill = theme
     _grpMain:insert(lblPlayAgain)
 
@@ -95,11 +89,11 @@ function scene:create(event)
 
 
     --Main menu
-    local btnMainMenu = display.newRoundedRect(_grpMain, _CX + 80, _CY + 100, 140, 60,20)
+    local btnMainMenu = display.newRoundedRect(_grpMain, _CX + 80, _CY + 130, 140, 60,20)
     btnMainMenu.fill = theme
     btnMainMenu.alpha = 0.4;
 
-    local lblMainMenu = display.newText("Main menu", _CX + 80, _CY + 100, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
+    local lblMainMenu = display.newText("Main menu", _CX + 80, _CY + 130, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
     lblMainMenu.fill = theme
     _grpMain:insert(lblMainMenu)
 
