@@ -1,22 +1,37 @@
-# 2023_Color-game
+# Color game
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/7395b08a7d5544d0b24faa96ad9b352c)](https://app.codacy.com/gh/matf-pp/2023_Color-game/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
-Na ekranu se pojavljuju boje koje su ispisane slovima u nekoj boji. Korisnik treba da klikne na polje ako je npr. rec crvena napisana crvenim slovima, u suprotnom ne klikce polje
+A game where your cognitive abilities are taken to the test, with colors!
 
----
-Potrebne instalacije: Solar2d
-Linux: sudo snap install solar2d
+<p float="left" align="middle">
+  <img src="screenshots/MainMenu.png" width="45%" />
+  <img src="screenshots/Leaderboards.png" width="45%" />
+</p>
 
-Ako se projekat spusta tokom pokretanja unutar solar2d launcher-a:
-File - clear project sandbox
+<p float="left" align="middle">
+  <img src="screenshots/Game1.png" width="45%" />
+  <img src="screenshots/Game2.png" width="45%" />
+</p>
 
-Koriscen je programski jezik Lua
+## Run Color game 
 
-Authors:
+### Linux (Ubuntu)
 
-<a href=https://github.com/LukaFilipovic471>Luka Filipovic</a>
+You will need Solar2d:
+```
+sudo snap install solar2d
+```
 
-<a href=https://github.com/pepi151101>Petra Ignjatovic</a>
+Clone the project and navigate to it via terminal:
+```
+git clone https://github.com/matf-pp/2023_Color-game.git
+cd 2023_Color-game
+```
 
-<a href=https://github.com/StefanJevtic63>Stefan Jevtic</a>
+If the game screen is not fully displayed, follow the next steps: <br>
+File -> clear project sandbox <br>
+
+## Credits
+
+Developed by Ignjatović Petra ([pepi151101](https://github.com/pepi151101)), Filipović Luka ([LukaFilipovic471](https://github.com/LukaFilipovic471)), and Jevtić Stefan ([StefanJevtic63](https://github.com/StefanJevtic63)).
