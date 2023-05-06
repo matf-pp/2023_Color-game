@@ -4,15 +4,14 @@
 
 A game where your cognitive abilities are taken to the test, with colors!
 
-<p float="left" align="middle">
-  <img src="screenshots/MainMenu.png" width="45%" />
-  <img src="screenshots/Leaderboards.png" width="45%" />
+<p float="left" align="center">
+  <img src="screenshots/MainMenu.png" width="22%" height"400"/>
+  <img src="screenshots/Leaderboards.png" width="22%" height"400"/>
+  <img src="screenshots/Game1.png" width="22%" height"400"/>
+  <img src="screenshots/Game2.png" width="22%" height"400"/>
 </p>
 
-<p float="left" align="middle">
-  <img src="screenshots/Game1.png" width="45%" />
-  <img src="screenshots/Game2.png" width="45%" />
-</p>
+
 
 ## Run Color game 
 
