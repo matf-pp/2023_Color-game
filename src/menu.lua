@@ -58,7 +58,7 @@ end
 
 local function gotoGame2()
      utilities:playSound(_click) 
-     composer.gotoScene("src.game2")
+     composer.gotoScene("src.game2alt")
      print("scene:create -")
      _grpMain = display.newGroup()
  end

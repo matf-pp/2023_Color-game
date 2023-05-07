@@ -32,7 +32,7 @@ local _click = audio.loadStream("ColorUpAssets/assets/sounds/click.wav")
 -- Local functions
 local function gotoPlayAgain()
     utilities:playSound(_click) 
-    composer.gotoScene("src.game2")
+    composer.gotoScene("src.game2alt")
     print("scene:create -")
 end
 
@@ -69,7 +69,7 @@ function scene:create(event)
     local _lblMessage = display.newText("Score = ", _CX - 20, _CY, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 46)
     _lblMessage.fill = theme
     local score = composer.getVariable("score")
-    score = math.log(score) / math.log(2) --treba logaritmovati sa osnovom 2 da bi se dobio pravi broj
+    --score = math.log(score) / math.log(2) --treba logaritmovati sa osnovom 2 da bi se dobio pravi broj
     local _scoreStr = display.newText(score, _CX + 80, _CY, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 46)
     _scoreStr.fill = theme
     _grpMain:insert(_lblMessage)
