@@ -95,53 +95,6 @@ local function gotoTimeIsUp()
   _grpMain = display.newGroup()
 end
 
-local function getTrueColorName(color)
-  local name
-  if(color == clrRed) then
-    name = "crvena"
-  elseif(color == clrGreen) then
-    name = "zelena"
-  elseif(color == clrBlue) then
-    name = "plava"
-  elseif(color == clrYellow) then
-    name = "zuta"
-  elseif(color == clrPurple) then
-    name = "ljubicasta"
-  elseif(color == clrBrown) then
-    name = "braon"
-  elseif(color == clrOrange) then
-    name = "narandzasta"
-  elseif(color == clrWhite) then
-    name = "bela"
-  elseif(color == clrBlack) then
-    name = "crna"
-  end
-
-  return name
-end
-
-
-local function getRandomColors(t)
-  if ( type(t) ~= "table" ) then
-    print( "WARNING: getRandomColors function expects a table" )
-    return nil, nil, nil, nil
-  end
-
-  local randomNumber1 = math.random(1, table.getn(t)-1)
-  local randomColor1 = t[randomNumber1]
-  table.remove(t, randomNumber1)
-
-  local randomNumber2 = math.random(1, table.getn(t)-1)
-  local randomColor2 = t[randomNumber2]
-  table.remove(t, randomNumber2)
-
-  local randomNumber3 = math.random(1, table.getn(t)-1)
-  local randomColor3 = t[randomNumber3]
-  table.remove(t, randomNumber3)
-
-  return randomColor1, randomColor2, randomColor3
-end
-
 local function calculate_progress()   -- as a percentage
   return (system.getTimer() - start_time) / duration
 end
@@ -188,19 +141,6 @@ local function SP2()
   start_time = os.time() -- record the start time
 
   Runtime:addEventListener("enterFrame", on_enter_frame)
-
-  --nasumicno izaberi boju
-  --[[ Generate a table containing all possible numbers between 1 and the length of colors
-local possibleNumbers = {}
-for i=1,#colors do
-  table.insert(possibleNumbers, i)
-end
-
--- Use the table library to shuffle the possibleNumbers table, then take the first four elements as the random numbers
-table.shuffle(possibleNumbers)
-local random1, random2, random3, random4 = table.unpack(possibleNumbers, 1, 4)
-
---print(random1, random2, random3, random4) -- Print the four random numbers npr 2 5 1 4 ]]
 
 local colorsCopy = colors;
 
@@ -256,10 +196,12 @@ local trueColorValue = colorValue(randomColor2)
         score = score + 1
         tablesGroup:removeSelf()
         SP2()
+        Runtime:removeEventListener("enterFrame", on_enter_frame)
     else
       tablesGroup:removeSelf()
       Runtime:removeEventListener("enterFrame", on_enter_frame)
       progress_bar.width = 0
+      composer.setVariable("score", score) 
       composer.gotoScene("src.wrongChoiceGame2")
     end
 end)
@@ -275,10 +217,12 @@ end)
         score = score + 1
         tablesGroup:removeSelf()
         SP2()
+        Runtime:removeEventListener("enterFrame", on_enter_frame)
     else
         tablesGroup:removeSelf()
         Runtime:removeEventListener("enterFrame", on_enter_frame)
         progress_bar.width = 0
+        composer.setVariable("score", score) 
         composer.gotoScene("src.wrongChoiceGame2")
     end
 end)
@@ -294,10 +238,12 @@ end)
         score = score + 1
         tablesGroup:removeSelf()
         SP2()
+        Runtime:removeEventListener("enterFrame", on_enter_frame)
     else
       tablesGroup:removeSelf()
       Runtime:removeEventListener("enterFrame", on_enter_frame)
       progress_bar.width = 0
+      composer.setVariable("score", score) 
       composer.gotoScene("src.wrongChoiceGame2")
     end
 end)
@@ -313,10 +259,12 @@ end)
         score = score + 1
         tablesGroup:removeSelf()
         SP2()
+        Runtime:removeEventListener("enterFrame", on_enter_frame)
     else
       tablesGroup:removeSelf()
       Runtime:removeEventListener("enterFrame", on_enter_frame)
       progress_bar.width = 0
+      composer.setVariable("score", score) 
       composer.gotoScene("src.wrongChoiceGame2")
     end
 end)
@@ -345,7 +293,7 @@ function scene:create(event)
   --reset the values
   score = 0
 
-  composer.setVariable("score", score)
+  --composer.setVariable("score", score)
 
   if utilities:checkBackground() == "white" then
     background = display.newImageRect(_grpMain, "ColorUpAssets/assets/images/black.png", _W, _H)

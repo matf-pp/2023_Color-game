@@ -202,7 +202,7 @@ function scene:create(event)
     btnLeaderboards.fill = theme
     btnLeaderboards.alpha = 0.4;
 
-    local lblLeaderboards = display.newText("Leaderboards", _CX, _CY+120, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
+    local lblLeaderboards = display.newText("Leaderboard", _CX, _CY+120, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 50)
     lblLeaderboards.fill = theme 
     _grpMain:insert(lblLeaderboards)
 

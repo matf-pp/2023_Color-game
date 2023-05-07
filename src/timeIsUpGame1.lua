@@ -198,7 +198,7 @@ function scene:create(event)
     btnMainMenu:addEventListener("tap", gotoMainMenu)
 
     --Leaderbords
-    local lblLeaderboards = display.newText("Leaderboards", _CX, _H - 40, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 46)
+    local lblLeaderboards = display.newText("Leaderboard", _CX, _H - 100, "ColorUpAssets/assets/fonts/alphabetized cassette tapes.ttf", 46)
     lblLeaderboards.fill = theme
     _grpMain:insert(lblLeaderboards)
 

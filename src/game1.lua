@@ -66,12 +66,6 @@ local tableRect
 
 -- Local functions
 
-if utilities:checkMusic() == "On" then
-  utilities:playMusic(music)
-else
-  audio.stop()
-end
-
 local function on_table_tap()
   --negativePoints()
   if((randomColor=="crvena" and fillStr==clrRed) or 
@@ -256,6 +250,12 @@ end
 
 
 local function gotoSP1()
+
+if utilities:checkMusic() == "On" then
+  utilities:playMusic(music)
+else
+  audio.stop()
+end
   SP1()
 end
 

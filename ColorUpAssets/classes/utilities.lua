@@ -15,7 +15,7 @@ if not db.sounds then       --if this doesn't exist, create it
 end
 
 if not db.music then
-    db:set("music", "On")
+    db:set("music", "Off")
     db:save()
 end
 
